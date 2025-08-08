@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack Data Structure Notes</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            border-left: 5px solid #3498db;
+            padding-left: 15px;
+            margin-top: 30px;
+        }
+        
+        .definition-box {
+            background-color: #e8f4fc;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .operations-box {
+            background-color: #f0f7eb;
+            border-left: 4px solid #2ecc71;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .example-box {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffb300;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .code-block {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 25px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .explanation-box {
+            background-color: #f3e5f5;
+            border-left: 4px solid #9c27b0;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .note {
+            background-color: #fffde7;
+            border-left: 4px solid #ffd600;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .operation-item {
+            margin: 10px 0;
+            padding-left: 15px;
+            border-left: 3px solid #3498db;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stack Data Structure Notes</h1>
+    
+    <div class="definition-box">
+        <h2>Stack Overview</h2>
+        <p>A stack is a linear data structure that follows the Last-In-First-Out (LIFO) principle.</p>
+    </div>
+    
+    <div class="operations-box">
+        <h2>Stack Operations</h2>
+        <div class="operation-item">
+            <strong>1. Push:</strong> Adds an element to the top of the stack.
+        </div>
+        <div class="operation-item">
+            <strong>2. Pop:</strong> Removes the top element from the stack.
+        </div>
+    </div>
+    
+    <h2>C Implementation</h2>
+    
+    <div class="code-block">
+        <pre>#include &lt;stdio.h&gt;
+#define MAX 5  // Maximum size of the stack
+
+int stack[MAX];
+int top = -1;  // Initialize top index to -1
+
+// Push operation
+void push(int element) {
+    if (top &lt; MAX - 1) {
+        top++;
+        stack[top] = element;
+    } else {
+        printf("Stack Overflow\n");
+    }
+}
+
+// Pop operation
+int pop() {
+    if (top &gt;= 0) {
+        int element = stack[top];
+        top--;
+        return element;
+    } else {
+        printf("Stack Underflow\n");
+        return -1;  // Return a sentinel value to indicate error
+    }
+}
+
+int main() {
+    push(1);
+    push(2);
+    push(3);
+
+    printf("Popped element: %d\n", pop());  // Output: 3
+    printf("Popped element: %d\n", pop());  // Output: 2
+    printf("Popped element: %d\n", pop());  // Output: 1
+
+    return 0;
+}</pre>
+    </div>
+    
+    <div class="explanation-box">
+        <h2>Explanation</h2>
+        <ul>
+            <li>We define a stack array of size MAX and a top variable to keep track of the top index.</li>
+            <li>The push function adds an element to the top of the stack if there is space available.</li>
+            <li>The pop function removes the top element from the stack if it is not empty.</li>
+        </ul>
+    </div>
+    
+    <div class="example-box">
+        <h2>Example</h2>
+        <p>Imagine a stack of books:</p>
+        <ul>
+            <li>When you add a book, it goes on top (push).</li>
+            <li>When you remove a book, it comes from the top (pop).</li>
+        </ul>
+        <p>In this example, we push three elements (1, 2, and 3) onto the stack and then pop them off, demonstrating the LIFO principle.</p>
+    </div>
+</body>
+</html>

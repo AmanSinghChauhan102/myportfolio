@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Search Algorithm</title>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --danger: #f72585;
+            --warning: #f8961e;
+            --info: #7209b7;
+            --search: #3a86ff;
+        }
+        
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f5f7ff;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1, h2, h3 {
+            color: var(--primary);
+            margin-top: 1.5rem;
+        }
+        
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .algorithm-box {
+            background-color: #e8f4fc;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .code-block {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 25px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .code-block .language {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            color: #7f848e;
+            font-size: 0.8rem;
+        }
+        
+        .visualization {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .step {
+            margin-bottom: 30px;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 20px;
+        }
+        
+        .step:last-child {
+            border-bottom: none;
+        }
+        
+        .array-display {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        
+        .array-element {
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+            border-radius: 4px;
+            font-weight: bold;
+            position: relative;
+        }
+        
+        .array-element.target {
+            background-color: var(--danger);
+        }
+        
+        .array-element.mid {
+            background-color: var(--search);
+        }
+        
+        .array-element.checked {
+            background-color: #aaa;
+        }
+        
+        .array-element.range {
+            background-color: var(--warning);
+        }
+        
+        .range-indicator {
+            position: absolute;
+            top: -20px;
+            font-size: 0.8rem;
+            color: var(--dark);
+        }
+        
+        .left-pointer::after {
+            content: 'L';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: var(--success);
+        }
+        
+        .right-pointer::after {
+            content: 'R';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: var(--danger);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .explanation {
+            background-color: #f0f7eb;
+            border-left: 4px solid #2ecc71;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .complexity-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .complexity-table th, .complexity-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .complexity-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .complexity-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .comparison {
+            background-color: #fff8e1;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            border-left: 4px solid var(--warning);
+        }
+    </style>
+</head>
+<body>
+    <h1>Binary Search Algorithm</h1>
+    
+    <div class="algorithm-box">
+        <h2>What is Binary Search?</h2>
+        <p>Binary search is an efficient algorithm for finding an item from a sorted list of items. It works by repeatedly dividing in half the portion of the list that could contain the item, until you've narrowed down the possible locations to just one.</p>
+    </div>
+    
+    <h2>How Binary Search Works</h2>
+    <ol>
+        <li><strong>Start with a Sorted List:</strong> Binary search requires the list to be sorted in ascending or descending order.</li>
+        <li><strong>Find the Middle Element:</strong> Find the middle element of the current search range.</li>
+        <li><strong>Compare the Target Element:</strong> Compare the target element with the middle element.</li>
+        <li><strong>Adjust the Search Range:</strong> If the target is less than the middle element, search the left half. If greater, search the right half.</li>
+        <li><strong>Repeat:</strong> Continue the process until the element is found or the search range is empty.</li>
+    </ol>
+    
+    <div class="code-block">
+        <span class="language">C</span>
+        <pre>#include &lt;stdio.h&gt;
+
+int binarySearch(int arr[], int n, int target) {
+    int left = 0;
+    int right = n - 1;
+
+    while (left &lt;= right) {
+        int mid = left + (right - left) / 2;
+
+        // Check if the target element is at the mid index
+        if (arr[mid] == target) {
+            return mid;
+        }
+
+        // If the target element is less than the mid element, search in the left half
+        if (arr[mid] &gt; target) {
+            right = mid - 1;
+        }
+
+        // If the target element is greater than the mid element, search in the right half
+        else {
+            left = mid + 1;
+        }
+    }
+
+    // If the target element is not found, return -1
+    return -1;
+}
+
+int main() {
+    int arr[] = {2, 5, 8, 12, 16, 23, 38, 56, 72, 91};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int target = 23;
+
+    int result = binarySearch(arr, n, target);
+
+    if (result == -1) {
+        printf("Element not found in the array\n");
+    } else {
+        printf("Element found at index %d\n", result);
+    }
+
+    return 0;
+}</pre>
+    </div>
+    
+    <div class="explanation">
+        <h3>Code Explanation</h3>
+        <p>The provided C program demonstrates the Binary Search algorithm:</p>
+        <ul>
+            <li><strong>binarySearch()</strong>: 
+                <ul>
+                    <li>Takes a sorted array, its size, and target value as input</li>
+                    <li>Uses two pointers (left and right) to track the current search range</li>
+                    <li>Calculates the middle index and compares the target with the middle element</li>
+                    <li>Adjusts the search range based on the comparison</li>
+                    <li>Returns the index if found, or -1 if not found</li>
+                </ul>
+            </li>
+            <li><strong>main()</strong>: 
+                <ul>
+                    <li>Initializes a sorted array</li>
+                    <li>Calls binarySearch() to find the target value (23)</li>
+                    <li>Prints the result (index where found or "not found")</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    
+    <h2>Time Complexity</h2>
+    <table class="complexity-table">
+        <tr>
+            <th>Case</th>
+            <th>Time Complexity</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Best Case</td>
+            <td>O(1)</td>
+            <td>When the target is the middle element of the array</td>
+        </tr>
+        <tr>
+            <td>Average Case</td>
+            <td>O(log n)</td>
+            <td>For random searches in the array</td>
+        </tr>
+        <tr>
+            <td>Worst Case</td>
+            <td>O(log n)</td>
+            <td>When the target is at either end or not present</td>
+        </tr>
+    </table>
+    
+    <div class="explanation">
+        <h3>Space Complexity</h3>
+        <p>Binary Search has a space complexity of O(1) for the iterative implementation (as shown above) because it uses a constant amount of additional space. For recursive implementations, the space complexity would be O(log n) due to the call stack.</p>
+    </div>
+    
+    <div class="comparison">
+        <h3>Binary Search vs. Linear Search</h3>
+        <p>Binary search is much more efficient than linear search for large datasets:</p>
+        <ul>
+            <li><strong>Binary Search:</strong> O(log n) time complexity - halves the search space each iteration</li>
+            <li><strong>Linear Search:</strong> O(n) time complexity - checks each element one by one</li>
+        </ul>
+        <p>For an array of 1,000,000 elements, binary search would take at most 20 comparisons (log₂1,000,000 ≈ 20), while linear search could take up to 1,000,000 comparisons in the worst case.</p>
+    </div>
+    
+    <h2>Visualization of Binary Search</h2>
+    <div class="visualization">
+        <div class="step">
+            <h3>Initial Array</h3>
+            <div class="array-display">
+                <div class="array-element left-pointer">2</div>
+                <div class="array-element">5</div>
+                <div class="array-element">8</div>
+                <div class="array-element">12</div>
+                <div class="array-element mid">16</div>
+                <div class="array-element">23</div>
+                <div class="array-element">38</div>
+                <div class="array-element">56</div>
+                <div class="array-element">72</div>
+                <div class="array-element right-pointer">91</div>
+            </div>
+            <p>Searching for target value 23 in the sorted array. Initial range is the entire array (L=0, R=9).</p>
+        </div>
+        
+        <div class="step">
+            <h3>First Comparison (mid = 16)</h3>
+            <div class="array-display">
+                <div class="array-element">2</div>
+                <div class="array-element">5</div>
+                <div class="array-element">8</div>
+                <div class="array-element">12</div>
+                <div class="array-element checked mid">16</div>
+                <div class="array-element range">23</div>
+                <div class="array-element range">38</div>
+                <div class="array-element range">56</div>
+                <div class="array-element range">72</div>
+                <div class="array-element range">91</div>
+            </div>
+            <p>23 > 16, so we discard the left half and search in the right subarray (indices 5-9).</p>
+        </div>
+        
+        <div class="step">
+            <h3>Second Comparison (mid = 56)</h3>
+            <div class="array-display">
+                <div class="array-element left-pointer">23</div>
+                <div class="array-element">38</div>
+                <div class="array-element mid">56</div>
+                <div class="array-element">72</div>
+                <div class="array-element right-pointer">91</div>
+            </div>
+            <p>23 < 56, so we discard the right half and search in the left subarray (indices 5-6).</p>
+        </div>
+        
+        <div class="step">
+            <h3>Third Comparison (mid = 23)</h3>
+            <div class="array-display">
+                <div class="array-element left-pointer mid target">23</div>
+                <div class="array-element right-pointer">38</div>
+            </div>
+            <p>23 == 23, so we've found our target at index 5!</p>
+        </div>
+    </div>
+    
+    <script>
+        // Simple animation for visualization
+        document.querySelectorAll('.array-element').forEach(el => {
+            el.addEventListener('click', function() {
+                this.classList.add('pulse');
+                setTimeout(() => {
+                    this.classList.remove('pulse');
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>

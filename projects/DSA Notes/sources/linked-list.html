@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linked List Notes</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            border-left: 5px solid #3498db;
+            padding-left: 15px;
+            margin-top: 30px;
+        }
+        
+        .definition-box {
+            background-color: #e8f4fc;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .example-box {
+            background-color: #f0f7eb;
+            border-left: 4px solid #2ecc71;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .code-block {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 25px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .menu-box {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .menu-item {
+            margin: 10px 0;
+            padding-left: 15px;
+            border-left: 3px solid #3498db;
+        }
+        
+        .note {
+            background-color: #fffde7;
+            border-left: 4px solid #ffd600;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Linked List Notes</h1>
+    
+    <div class="definition-box">
+        <h2>What is a Linked List?</h2>
+        <p>A linked list is a data structure in which elements are stored as separate objects, and each element points to the next element in the sequence. This structure allows for efficient insertion and deletion of elements.</p>
+    </div>
+    
+    <h2>Key Components</h2>
+    <ol>
+        <li><strong>Node:</strong> A node is an element in the linked list, which contains data and a reference (or link) to the next node.</li>
+        <li><strong>Head:</strong> The head is the first node in the linked list.</li>
+        <li><strong>Tail:</strong> The tail is the last node in the linked list.</li>
+    </ol>
+    
+    <div class="example-box">
+        <h2>Example</h2>
+        <p>Let's consider a simple linked list with the following nodes:</p>
+        
+        <table>
+            <tr>
+                <th>Node</th>
+                <th>Data</th>
+                <th>Next</th>
+            </tr>
+            <tr>
+                <td>A</td>
+                <td>1</td>
+                <td>B</td>
+            </tr>
+            <tr>
+                <td>B</td>
+                <td>2</td>
+                <td>C</td>
+            </tr>
+            <tr>
+                <td>C</td>
+                <td>3</td>
+                <td>NULL</td>
+            </tr>
+        </table>
+        
+        <p>In this example:</p>
+        <ul>
+            <li>Node A is the head of the linked list.</li>
+            <li>Node C is the tail of the linked list.</li>
+            <li>Each node points to the next node in the sequence.</li>
+        </ul>
+    </div>
+    
+    <h2>How Linked Lists Work</h2>
+    <ol>
+        <li><strong>Insertion:</strong> To insert a new node, we update the next pointer of the previous node to point to the new node.</li>
+        <li><strong>Deletion:</strong> To delete a node, we update the next pointer of the previous node to point to the node after the deleted node.</li>
+    </ol>
+    
+    <h2>Benefits</h2>
+    <ol>
+        <li><strong>Dynamic Memory Allocation:</strong> Linked lists can grow or shrink dynamically as nodes are added or removed.</li>
+        <li><strong>Efficient Insertion and Deletion:</strong> Linked lists allow for efficient insertion and deletion of nodes, especially in the middle of the list.</li>
+    </ol>
+    
+    <h2>Common Operations</h2>
+    <ol>
+        <li><strong>Traversal:</strong> Traversing the linked list to access each node's data.</li>
+        <li><strong>Insertion:</strong> Inserting a new node into the linked list.</li>
+        <li><strong>Deletion:</strong> Deleting a node from the linked list.</li>
+    </ol>
+    
+    <h2>C Implementation</h2>
+    
+    <div class="code-block">
+        <pre>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+// Define the structure for a node in the linked list
+typedef struct Node {
+    int data;
+    struct Node* next;
+} Node;
+
+// Global head pointer, initialized to NULL for an empty list
+Node* head = NULL;
+
+// --- Function Prototypes ---
+Node* createNode(int data);
+void insertAtBeginning(int data);
+void insertAtEnd(int data);
+void insertAtPosition(int data, int position);
+void deleteFirst();
+void deleteLast();
+void deleteByValue(int value);
+void updateNode(int oldValue, int newValue);
+void traverseList();
+
+// --- Main Function (Menu Driven) ---
+int main() {
+    int choice, data, position, oldValue, newValue;
+
+    while (1) {
+        printf("\n--- Singly Linked List Menu ---\n");
+        printf("1.  Insert at Beginning\n");
+        printf("2.  Insert at End\n");
+        printf("3.  Insert at a Specific Position\n");
+        printf("4.  Delete First Node\n");
+        printf("5.  Delete Last Node\n");
+        printf("6.  Delete Node by Value\n");
+        printf("7.  Update Node Value\n");
+        printf("8.  Traverse and Display List\n");
+        printf("9.  Exit\n");
+        printf("--------------------------------\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter data to insert at the beginning: ");
+                scanf("%d", &data);
+                insertAtBeginning(data);
+                break;
+
+            case 2:
+                printf("Enter data to insert at the end: ");
+                scanf("%d", &data);
+                insertAtEnd(data);
+                break;
+
+            case 3:
+                printf("Enter data to insert: ");
+                scanf("%d", &data);
+                printf("Enter the position (1-based): ");
+                scanf("%d", &position);
+                insertAtPosition(data, position);
+                break;
+
+            case 4:
+                deleteFirst();
+                break;
+
+            case 5:
+                deleteLast();
+                break;
+
+            case 6:
+                printf("Enter the value of the node to delete: ");
+                scanf("%d", &data);
+                deleteByValue(data);
+                break;
+
+            case 7:
+                printf("Enter the value of the node to update: ");
+                scanf("%d", &oldValue);
+                printf("Enter the new value: ");
+                scanf("%d", &newValue);
+                updateNode(oldValue, newValue);
+                break;
+
+            case 8:
+                traverseList();
+                break;
+
+            case 9:
+                printf("Exiting program. Goodbye!\n");
+                // Free the entire list before exiting to prevent memory leaks
+                while(head != NULL) {
+                    deleteFirst();
+                }
+                exit(0);
+
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    }
+
+    return 0;
+}
+
+// --- Function Implementations ---
+
+/**
+ * @brief Creates a new node with the given data.
+ * @param data The integer data for the new node.
+ * @return A pointer to the newly created node.
+ */
+Node* createNode(int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    if (newNode == NULL) {
+        printf("Error: Memory allocation failed.\n");
+        exit(1);
+    }
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+/**
+ * @brief Inserts a new node at the beginning of the list.
+ * @param data The data for the new node.
+ */
+void insertAtBeginning(int data) {
+    Node* newNode = createNode(data);
+    newNode->next = head;
+    head = newNode;
+    printf("Node with data %d inserted at the beginning.\n", data);
+}
+
+/**
+ * @brief Inserts a new node at the end of the list.
+ * @param data The data for the new node.
+ */
+void insertAtEnd(int data) {
+    Node* newNode = createNode(data);
+    if (head == NULL) {
+        head = newNode; // If the list is empty, new node becomes the head
+    } else {
+        Node* temp = head;
+        // Traverse to the last node
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+    printf("Node with data %d inserted at the end.\n", data);
+}
+
+/**
+ * @brief Inserts a new node at a specified position.
+ * @param data The data for the new node.
+ * @param position The 1-based position for insertion.
+ */
+void insertAtPosition(int data, int position) {
+    if (position < 1) {
+        printf("Invalid position. Position must be 1 or greater.\n");
+        return;
+    }
+    if (position == 1) {
+        insertAtBeginning(data);
+        return;
+    }
+
+    Node* newNode = createNode(data);
+    Node* temp = head;
+    int currentPosition = 1;
+
+    // Traverse to the node just before the target position
+    while (currentPosition < position - 1 && temp != NULL) {
+        temp = temp->next;
+        currentPosition++;
+    }
+
+    if (temp == NULL) {
+        printf("Invalid position. Position %d is out of bounds.\n", position);
+        free(newNode); // Free the allocated node as it won't be used
+    } else {
+        newNode->next = temp->next;
+        temp->next = newNode;
+        printf("Node with data %d inserted at position %d.\n", data, position);
+    }
+}
+
+/**
+ * @brief Deletes the first node of the list.
+ */
+void deleteFirst() {
+    if (head == NULL) {
+        printf("List is empty. Nothing to delete.\n");
+        return;
+    }
+    Node* temp = head;
+    head = head->next;
+    printf("Deleted first node with data %d.\n", temp->data);
+    free(temp);
+}
+
+/**
+ * @brief Deletes the last node of the list.
+ */
+void deleteLast() {
+    if (head == NULL) {
+        printf("List is empty. Nothing to delete.\n");
+        return;
+    }
+    if (head->next == NULL) { // Only one node in the list
+        printf("Deleted last node with data %d.\n", head->data);
+        free(head);
+        head = NULL;
+        return;
+    }
+
+    Node* temp = head;
+    // Traverse to the second to last node
+    while (temp->next->next != NULL) {
+        temp = temp->next;
+    }
+
+    Node* nodeToDelete = temp->next;
+    temp->next = NULL;
+    printf("Deleted last node with data %d.\n", nodeToDelete->data);
+    free(nodeToDelete);
+}
+
+/**
+ * @brief Deletes a node with a specific value.
+ * @param value The value of the node to be deleted.
+ */
+void deleteByValue(int value) {
+    if (head == NULL) {
+        printf("List is empty. Nothing to delete.\n");
+        return;
+    }
+
+    Node* temp = head;
+    Node* prev = NULL;
+
+    // If the head node itself holds the value
+    if (temp != NULL && temp->data == value) {
+        head = temp->next;
+        printf("Deleted node with value %d.\n", value);
+        free(temp);
+        return;
+    }
+
+    // Search for the value to be deleted
+    while (temp != NULL && temp->data != value) {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    // If value was not present in the list
+    if (temp == NULL) {
+        printf("Node with value %d not found in the list.\n", value);
+        return;
+    }
+
+    // Unlink the node from the list
+    prev->next = temp->next;
+    printf("Deleted node with value %d.\n", value);
+    free(temp);
+}
+
+/**
+ * @brief Finds a node by its value and updates it to a new value.
+ * @param oldValue The current value of the node to find.
+ * @param newValue The new value to set.
+ */
+void updateNode(int oldValue, int newValue) {
+    if (head == NULL) {
+        printf("List is empty. Cannot update.\n");
+        return;
+    }
+
+    Node* temp = head;
+    while (temp != NULL) {
+        if (temp->data == oldValue) {
+            temp->data = newValue;
+            printf("Node with value %d updated to %d.\n", oldValue, newValue);
+            return; // Exit after the first match is updated
+        }
+        temp = temp->next;
+    }
+
+    printf("Node with value %d not found in the list.\n", oldValue);
+}
+
+/**
+ * @brief Traverses the list and prints the data of each node.
+ */
+void traverseList() {
+    if (head == NULL) {
+        printf("List is empty.\n");
+        return;
+    }
+    Node* temp = head;
+    printf("Linked List: HEAD -> ");
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}</pre>
+    </div>
+</body>
+</html>

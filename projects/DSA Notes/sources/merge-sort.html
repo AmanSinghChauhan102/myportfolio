@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merge Sort Algorithm</title>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --danger: #f72585;
+            --warning: #f8961e;
+            --info: #7209b7;
+            --merge: #3a86ff;
+        }
+        
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f5f7ff;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1, h2, h3 {
+            color: var(--primary);
+            margin-top: 1.5rem;
+        }
+        
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .algorithm-box {
+            background-color: #e8f4fc;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .code-block {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 25px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .code-block .language {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            color: #7f848e;
+            font-size: 0.8rem;
+        }
+        
+        .visualization {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .step {
+            margin-bottom: 30px;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 20px;
+        }
+        
+        .step:last-child {
+            border-bottom: none;
+        }
+        
+        .array-display {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        
+        .array-element {
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+            border-radius: 4px;
+            font-weight: bold;
+            position: relative;
+        }
+        
+        .array-element.left-half {
+            background-color: var(--info);
+        }
+        
+        .array-element.right-half {
+            background-color: var(--warning);
+        }
+        
+        .array-element.merged {
+            background-color: var(--success);
+        }
+        
+        .array-element.comparing {
+            animation: pulse 0.5s ease-in-out;
+        }
+        
+        .partition-line {
+            height: 60px;
+            width: 2px;
+            background-color: var(--danger);
+            margin: 0 10px;
+            position: relative;
+        }
+        
+        .partition-line::after {
+            content: 'Merge';
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: var(--danger);
+            white-space: nowrap;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .explanation {
+            background-color: #f0f7eb;
+            border-left: 4px solid #2ecc71;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .complexity-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .complexity-table th, .complexity-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .complexity-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .complexity-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .recursion-visual {
+            background-color: #fff8e1;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            border-left: 4px solid var(--warning);
+        }
+        
+        .iterative-process {
+            background-color: #f3e5f5;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            border-left: 4px solid var(--info);
+        }
+    </style>
+</head>
+<body>
+    <h1>Merge Sort Algorithm</h1>
+    
+    <div class="algorithm-box">
+        <h2>What is Merge Sort?</h2>
+        <p>Merge Sort is a divide-and-conquer algorithm that works by recursively dividing the input array into two halves, sorting each half, and then merging the sorted halves back together. It's known for its stable O(n log n) time complexity in all cases.</p>
+    </div>
+    
+    <h2>Algorithm Steps</h2>
+    <ol>
+        <li><strong>Divide:</strong> Split the array into two equal (or nearly equal) halves.</li>
+        <li><strong>Conquer:</strong> Recursively sort each half (or use iterative approach as in this implementation).</li>
+        <li><strong>Merge:</strong> Combine the two sorted halves into a single sorted array by repeatedly comparing the smallest elements from each half.</li>
+    </ol>
+    
+    <div class="code-block">
+        <span class="language">C</span>
+        <pre>#include &lt;stdio.h&gt;
+
+// Define the number of elements
+#define N 10
+
+// Function to merge two subarrays of arr[]
+// First subarray is arr[left..mid]
+// Second subarray is arr[mid+1..right]
+void merge(int arr[], int left, int mid, int right) {
+    int i, j, k;
+    
+    // Calculate the size of the two temporary subarrays
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+
+    // Create temporary arrays
+    // VLA (Variable Length Array) is a C99 feature
+    int L[n1], R[n2];
+
+    // --- Step 1: Copy data to temporary arrays L[] and R[] ---
+    for (i = 0; i &lt; n1; i++)
+        L[i] = arr[left + i];
+    for (j = 0; j &lt; n2; j++)
+        R[j] = arr[mid + 1 + j];
+
+    // --- Step 2: Merge the temp arrays back into arr[left..right] ---
+    i = 0;      // Initial index of first subarray
+    j = 0;      // Initial index of second subarray
+    k = left;   // Initial index of the merged subarray in the original array
+
+    while (i &lt; n1 &amp;&amp; j &lt; n2) {
+        // Compare elements and place the smaller one into the correct position
+        if (L[i] &lt;= R[j]) {
+            arr[k] = L[i];
+            i++;
+        } else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+
+    // --- Step 3: Copy the remaining elements of L[], if there are any ---
+    while (i &lt; n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+
+    // --- Step 4: Copy the remaining elements of R[], if there are any ---
+    while (j &lt; n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+
+// Iterative (loop-based) Merge Sort function
+void mergeSort(int arr[], int n) {
+    int current_size; // For the size of subarrays to be merged (1, 2, 4, 8...)
+    int left_start;   // For picking the starting index of the left subarray
+
+    // This loop implements the bottom-up strategy.
+    // It merges subarrays of size 1, then size 2, then 4, and so on.
+    for (current_size = 1; current_size &lt;= n - 1; current_size = 2 * current_size) {
+        
+        // This loop picks the starting point of different subarrays to be merged
+        for (left_start = 0; left_start &lt; n - 1; left_start += 2 * current_size) {
+            
+            // Find the middle and right endpoints of the subarrays
+            int mid = left_start + current_size - 1;
+            int right_end = left_start + 2 * current_size - 1;
+
+            // Make sure the right endpoint does not go out of bounds
+            if (right_end &gt; n - 1) {
+                right_end = n - 1;
+            }
+            
+            // Make sure the middle point is valid before calling merge
+            // This condition is important for arrays with odd lengths or
+            // for the last pair of subarrays in an iteration.
+            if (mid &lt; right_end) {
+                 merge(arr, left_start, mid, right_end);
+            }
+        }
+    }
+}
+
+// Utility function to print an array
+void printArray(int A[], int size) {
+    for (int i = 0; i &lt; size; i++)
+        printf("%d ", A[i]);
+    printf("\n");
+}
+
+// Main driver function
+int main() {
+    int arr[N];
+    int i;
+
+    // 1. Get input from the user
+    printf("Enter %d integers:\n", N);
+    for (i = 0; i &lt; N; i++) {
+        // Simple input validation can be added here
+        scanf("%d", &arr[i]);
+    }
+
+    // 2. Print the original array
+    printf("\nOriginal array: \n");
+    printArray(arr, N);
+
+    // 3. Call the sorting function
+    mergeSort(arr, N);
+
+    // 4. Print the sorted array
+    printf("\nSorted array (using Merge Sort): \n");
+    printArray(arr, N);
+
+    return 0;
+}</pre>
+    </div>
+    
+    <div class="explanation">
+        <h3>Code Explanation</h3>
+        <p>The provided C program demonstrates the Merge Sort algorithm with an iterative (bottom-up) approach:</p>
+        <ul>
+            <li><strong>merge()</strong>: 
+                <ul>
+                    <li>Merges two sorted subarrays into one sorted array</li>
+                    <li>Creates temporary arrays for the left and right halves</li>
+                    <li>Compares elements from both halves and merges them in order</li>
+                    <li>Copies any remaining elements from either half</li>
+                </ul>
+            </li>
+            <li><strong>mergeSort()</strong>: 
+                <ul>
+                    <li>Iterative implementation that avoids recursion</li>
+                    <li>Starts by merging subarrays of size 1, then doubles the size each iteration</li>
+                    <li>Efficiently handles arrays of any size, including odd lengths</li>
+                </ul>
+            </li>
+            <li><strong>main()</strong>: 
+                <ul>
+                    <li>Accepts 10 integers from user input</li>
+                    <li>Displays the original array</li>
+                    <li>Calls mergeSort() to sort the array</li>
+                    <li>Displays the sorted result</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="iterative-process">
+        <h3>Iterative vs Recursive Merge Sort</h3>
+        <p>This implementation uses an iterative (bottom-up) approach rather than the traditional recursive (top-down) method:</p>
+        <ul>
+            <li><strong>Advantages of Iterative Approach:</strong>
+                <ul>
+                    <li>Avoids recursion stack overhead</li>
+                    <li>Uses constant O(1) space for the iterative version (compared to O(log n) for recursive)</li>
+                    <li>Easier to understand for some programmers</li>
+                </ul>
+            </li>
+            <li><strong>How It Works:</strong>
+                <ul>
+                    <li>Starts by merging pairs of single-element subarrays</li>
+                    <li>Then merges pairs of two-element subarrays, and so on</li>
+                    <li>Continues doubling the subarray size until the entire array is sorted</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    
+    <h2>Time Complexity</h2>
+    <table class="complexity-table">
+        <tr>
+            <th>Case</th>
+            <th>Time Complexity</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Best Case</td>
+            <td>O(n log n)</td>
+            <td>All cases have the same complexity</td>
+        </tr>
+        <tr>
+            <td>Average Case</td>
+            <td>O(n log n)</td>
+            <td>Consistent performance</td>
+        </tr>
+        <tr>
+            <td>Worst Case</td>
+            <td>O(n log n)</td>
+            <td>Stable performance regardless of input</td>
+        </tr>
+    </table>
+    
+    <div class="explanation">
+        <h3>Space Complexity</h3>
+        <p>Merge Sort has a space complexity of O(n) due to the temporary arrays used during merging. The iterative implementation in this code uses VLAs (Variable Length Arrays) which are stack-allocated, but the space requirement is still linear with respect to input size.</p>
+    </div>
+    
+    <h2>Visualization of Merge Sort</h2>
+    <div class="visualization">
+        <div class="step">
+            <h3>Initial Array</h3>
+            <div class="array-display">
+                <div class="array-element">38</div>
+                <div class="array-element">27</div>
+                <div class="array-element">43</div>
+                <div class="array-element">3</div>
+                <div class="array-element">9</div>
+                <div class="array-element">82</div>
+                <div class="array-element">10</div>
+                <div class="array-element">5</div>
+                <div class="array-element">16</div>
+                <div class="array-element">1</div>
+            </div>
+            <p>Initial unsorted array with 10 elements.</p>
+        </div>
+        
+        <div class="step">
+            <h3>First Pass (size=1)</h3>
+            <div class="array-display">
+                <div class="array-element left-half merged">27</div>
+                <div class="array-element right-half merged">38</div>
+                <div class="partition-line"></div>
+                <div class="array-element left-half merged">3</div>
+                <div class="array-element right-half merged">43</div>
+                <div class="partition-line"></div>
+                <div class="array-element left-half merged">9</div>
+                <div class="array-element right-half merged">82</div>
+                <div class="partition-line"></div>
+                <div class="array-element left-half merged">5</div>
+                <div class="array-element right-half merged">10</div>
+                <div class="partition-line"></div>
+                <div class="array-element left-half merged">1</div>
+                <div class="array-element right-half merged">16</div>
+            </div>
+            <p>Merge adjacent pairs of single elements into sorted subarrays of size 2.</p>
+        </div>
+        
+        <div class="step">
+            <h3>Second Pass (size=2)</h3>
+            <div class="array-display">
+                <div class="array-element left-half merged">3</div>
+                <div class="array-element left-half merged">27</div>
+                <div class="array-element right-half merged">38</div>
+                <div class="array-element right-half merged">43</div>
+                <div class="partition-line"></div>
+                <div class="array-element left-half merged">5</div>
+                <div class="array-element left-half merged">9</div>
+                <div class="array-element right-half merged">10</div>
+                <div class="array-element right-half merged">82</div>
+                <div class="partition-line"></div>
+                <div class="array-element left-half merged">1</div>
+                <div class="array-element right-half merged">16</div>
+            </div>
+            <p>Merge adjacent sorted subarrays of size 2 into sorted subarrays of size 4.</p>
+        </div>
+        
+        <div class="step">
+            <h3>Third Pass (size=4)</h3>
+            <div class="array-display">
+                <div class="array-element left-half merged">3</div>
+                <div class="array-element left-half merged">5</div>
+                <div class="array-element left-half merged">9</div>
+                <div class="array-element left-half merged">10</div>
+                <div class="array-element left-half merged">27</div>
+                <div class="array-element right-half merged">38</div>
+                <div class="array-element right-half merged">43</div>
+                <div class="array-element right-half merged">82</div>
+                <div class="partition-line"></div>
+                <div class="array-element left-half merged">1</div>
+                <div class="array-element right-half merged">16</div>
+            </div>
+            <p>Merge sorted subarrays of size 4 and 2 into larger sorted subarrays.</p>
+        </div>
+        
+        <div class="step">
+            <h3>Final Sorted Array</h3>
+            <div class="array-display">
+                <div class="array-element merged">1</div>
+                <div class="array-element merged">3</div>
+                <div class="array-element merged">5</div>
+                <div class="array-element merged">9</div>
+                <div class="array-element merged">10</div>
+                <div class="array-element merged">16</div>
+                <div class="array-element merged">27</div>
+                <div class="array-element merged">38</div>
+                <div class="array-element merged">43</div>
+                <div class="array-element merged">82</div>
+            </div>
+            <p>After final merge pass, the entire array is sorted.</p>
+        </div>
+    </div>
+    
+    <script>
+        // Simple animation for visualization
+        document.querySelectorAll('.array-element').forEach(el => {
+            el.addEventListener('click', function() {
+                this.classList.add('comparing');
+                setTimeout(() => {
+                    this.classList.remove('comparing');
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>

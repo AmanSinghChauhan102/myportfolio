@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doubly and Circular Linked List Notes</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            border-left: 5px solid #3498db;
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+        
+        .definition-box {
+            background-color: #e8f4fc;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .example-box {
+            background-color: #f0f7eb;
+            border-left: 4px solid #2ecc71;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .node-structure {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffb300;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+            text-align: center;
+        }
+        
+        .benefits-box {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .use-cases-box {
+            background-color: #f3e5f5;
+            border-left: 4px solid #9c27b0;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .code-block {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 25px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .menu-box {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .menu-item {
+            margin: 10px 0;
+            padding-left: 15px;
+            border-left: 3px solid #3498db;
+        }
+        
+        .note {
+            background-color: #fffde7;
+            border-left: 4px solid #ffd600;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .section-divider {
+            border-top: 2px dashed #7f8c8d;
+            margin: 40px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Doubly and Circular Linked List Notes</h1>
+    
+    <div class="definition-box">
+        <h2>Doubly Linked List</h2>
+        <p>A doubly linked list is a type of data structure in which each node has two pointers:</p>
+        <ol>
+            <li><strong>Next pointer:</strong> Points to the next node in the list.</li>
+            <li><strong>Previous pointer:</strong> Points to the previous node in the list.</li>
+        </ol>
+        <p>This allows for efficient traversal in both forward and backward directions.</p>
+    </div>
+    
+    <div class="example-box">
+        <h3>Example</h3>
+        <p>Imagine a train with multiple cars. Each car represents a node, and the couplings between cars represent the pointers.</p>
+        <ul>
+            <li>Each car (node) has a reference to the next car (next pointer) and the previous car (previous pointer).</li>
+            <li>You can traverse the train in both forward (from first car to last car) and backward (from last car to first car) directions.</li>
+        </ul>
+    </div>
+    
+    <div class="node-structure">
+        <h3>Node Structure</h3>
+        <p>A node in a doubly linked list typically has three components:</p>
+        <pre>+------+------+------+
+| prev | data | next |
++------+------+------+</pre>
+        <ol>
+            <li><strong>Data:</strong> The actual data stored in the node.</li>
+            <li><strong>Next:</strong> A pointer to the next node in the list.</li>
+            <li><strong>Previous:</strong> A pointer to the previous node in the list.</li>
+        </ol>
+    </div>
+    
+    <div class="benefits-box">
+        <h3>Benefits</h3>
+        <p>Doubly linked lists offer several benefits:</p>
+        <ul>
+            <li>Efficient insertion and deletion of nodes at any position in the list.</li>
+            <li>Fast traversal in both forward and backward directions.</li>
+        </ul>
+    </div>
+    
+    <div class="use-cases-box">
+        <h3>Use cases</h3>
+        <p>Doubly linked lists are useful in scenarios where:</p>
+        <ul>
+            <li>You need to frequently insert or delete nodes at arbitrary positions.</li>
+            <li>You need to traverse the list in both forward and backward directions.</li>
+        </ul>
+    </div>
+    
+    <div class="note">
+        <p>In summary, a doubly linked list is a data structure that allows for efficient traversal and manipulation of nodes in both forward and backward directions.</p>
+    </div>
+    
+    <div class="section-divider"></div>
+    
+    <div class="definition-box">
+        <h2>Circular Linked List</h2>
+        <p>A circular linked list is a type of linked list where the last node points back to the first node, forming a circle.</p>
+    </div>
+    
+    <div class="example-box">
+        <h3>Example</h3>
+        <p>Imagine a playground merry-go-round. Each horse on the merry-go-round represents a node, and the connections between horses represent the pointers.</p>
+        <ul>
+            <li>Each horse (node) points to the next horse (next pointer).</li>
+            <li>The last horse points back to the first horse, forming a circle.</li>
+        </ul>
+    </div>
+    
+    <div class="benefits-box">
+        <h3>Characteristics</h3>
+        <ul>
+            <li>The last node points to the first node, creating a circular structure.</li>
+            <li>There is no NULL pointer at the end of the list.</li>
+        </ul>
+    </div>
+    
+    <div class="benefits-box">
+        <h3>Benefits</h3>
+        <p>Circular linked lists offer several benefits:</p>
+        <ul>
+            <li>Efficient traversal of the list in a circular manner.</li>
+            <li>Can be used to implement buffers, queues, and other data structures.</li>
+        </ul>
+    </div>
+    
+    <div class="use-cases-box">
+        <h3>Use cases</h3>
+        <p>Circular linked lists are useful in scenarios where:</p>
+        <ul>
+            <li>You need to traverse a list in a circular manner.</li>
+            <li>You need to implement a buffer or queue with a fixed size.</li>
+        </ul>
+    </div>
+    
+    <div class="note">
+        <p>In summary, a circular linked list is a data structure where the last node points back to the first node, forming a circle. This allows for efficient circular traversal and can be useful in various applications.</p>
+    </div>
+    
+    <div class="section-divider"></div>
+    
+    <h2>C Program for Doubly Linked List Operations</h2>
+    <p>This program covers the following operations:</p>
+    
+    <div class="menu-box">
+        <h3>Insertion:</h3>
+        <div class="menu-item">At the beginning</div>
+        <div class="menu-item">At the end</div>
+        <div class="menu-item">At a specific position</div>
+        
+        <h3>Deletion:</h3>
+        <div class="menu-item">From the beginning</div>
+        <div class="menu-item">From the end</div>
+        <div class="menu-item">From a specific position</div>
+        
+        <h3>Traversal / Display:</h3>
+        <div class="menu-item">Displaying the list forward</div>
+        <div class="menu-item">Displaying the list backward (a key feature of doubly linked lists)</div>
+        
+        <h3>Utility:</h3>
+        <div class="menu-item">Searching for an element</div>
+        <div class="menu-item">Freeing the entire list to prevent memory leaks</div>
+    </div>
+    
+    <div class="code-block">
+        <pre>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+// Structure for a node in the doubly linked list
+struct Node {
+    int data;
+    struct Node* prev;
+    struct Node* next;
+};
+
+// Global pointer to the first node of the list
+struct Node* head = NULL;
+
+// Function Prototypes
+void insertAtBeginning(int data);
+void insertAtEnd(int data);
+void insertAtPosition(int data, int pos);
+void deleteFromBeginning();
+void deleteFromEnd();
+void deleteFromPosition(int pos);
+void displayForward();
+void displayBackward();
+void search(int data);
+void freeList();
+
+// Helper function to create a new node
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    if (newNode == NULL) {
+        printf("Error: Memory allocation failed.\n");
+        exit(1);
+    }
+    newNode->data = data;
+    newNode->prev = NULL;
+    newNode->next = NULL;
+    return newNode;
+}
+
+// ---- INSERTION OPERATIONS ----
+
+// 1. Insert a node at the beginning of the list
+void insertAtBeginning(int data) {
+    struct Node* newNode = createNode(data);
+    if (head == NULL) { // If the list is empty
+        head = newNode;
+    } else {
+        newNode->next = head;
+        head->prev = newNode;
+        head = newNode;
+    }
+    printf("Inserted %d at the beginning.\n", data);
+}
+
+// 2. Insert a node at the end of the list
+void insertAtEnd(int data) {
+    struct Node* newNode = createNode(data);
+    if (head == NULL) { // If the list is empty
+        head = newNode;
+    } else {
+        struct Node* temp = head;
+        // Traverse to the last node
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+        newNode->prev = temp;
+    }
+    printf("Inserted %d at the end.\n", data);
+}
+
+// 3. Insert a node at a specific position (1-based index)
+void insertAtPosition(int data, int pos) {
+    if (pos < 1) {
+        printf("Invalid position!\n");
+        return;
+    }
+    if (pos == 1) {
+        insertAtBeginning(data);
+        return;
+    }
+
+    struct Node* newNode = createNode(data);
+    struct Node* temp = head;
+    int currentPos = 1;
+
+    // Traverse to the node just before the desired position
+    while (currentPos < pos - 1 && temp != NULL) {
+        temp = temp->next;
+        currentPos++;
+    }
+
+    if (temp == NULL) {
+        printf("Position %d is out of bounds.\n", pos);
+        free(newNode); // Free the unused new node
+        return;
+    }
+
+    newNode->next = temp->next;
+    if (temp->next != NULL) {
+        temp->next->prev = newNode;
+    }
+    temp->next = newNode;
+    newNode->prev = temp;
+    printf("Inserted %d at position %d.\n", data, pos);
+}
+
+
+// ---- DELETION OPERATIONS ----
+
+// 4. Delete a node from the beginning
+void deleteFromBeginning() {
+    if (head == NULL) {
+        printf("List is empty. Nothing to delete.\n");
+        return;
+    }
+
+    struct Node* temp = head;
+    int deletedData = temp->data;
+
+    if (head->next == NULL) { // Only one node in the list
+        head = NULL;
+    } else {
+        head = head->next;
+        head->prev = NULL;
+    }
+    free(temp);
+    printf("Deleted %d from the beginning.\n", deletedData);
+}
+
+// 5. Delete a node from the end
+void deleteFromEnd() {
+    if (head == NULL) {
+        printf("List is empty. Nothing to delete.\n");
+        return;
+    }
+
+    struct Node* temp = head;
+    int deletedData;
+
+    if (head->next == NULL) { // Only one node
+        deletedData = head->data;
+        free(head);
+        head = NULL;
+    } else {
+        // Traverse to the last node
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        deletedData = temp->data;
+        temp->prev->next = NULL; // The second-to-last node becomes the new last node
+        free(temp);
+    }
+    printf("Deleted %d from the end.\n", deletedData);
+}
+
+// 6. Delete a node from a specific position (1-based index)
+void deleteFromPosition(int pos) {
+    if (head == NULL || pos < 1) {
+        printf("Invalid operation: List is empty or position is invalid.\n");
+        return;
+    }
+
+    if (pos == 1) {
+        deleteFromBeginning();
+        return;
+    }
+
+    struct Node* temp = head;
+    int currentPos = 1;
+
+    // Traverse to the node to be deleted
+    while (currentPos < pos && temp != NULL) {
+        temp = temp->next;
+        currentPos++;
+    }
+
+    if (temp == NULL) {
+        printf("Position %d is out of bounds.\n", pos);
+        return;
+    }
+
+    int deletedData = temp->data;
+    temp->prev->next = temp->next;
+    if (temp->next != NULL) { // If it's not the last node
+        temp->next->prev = temp->prev;
+    }
+    free(temp);
+    printf("Deleted %d from position %d.\n", deletedData, pos);
+}
+
+
+// ---- DISPLAY AND UTILITY OPERATIONS ----
+
+// 7. Display the list from beginning to end
+void displayForward() {
+    if (head == NULL) {
+        printf("List is empty.\n");
+        return;
+    }
+
+    struct Node* temp = head;
+    printf("List (Forward):  NULL <=> ");
+    while (temp != NULL) {
+        printf("%d <=> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+// 8. Display the list from end to beginning
+void displayBackward() {
+    if (head == NULL) {
+        printf("List is empty.\n");
+        return;
+    }
+
+    struct Node* temp = head;
+    // Go to the last node first
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+
+    // Traverse backward using prev pointer
+    printf("List (Backward): NULL <=> ");
+    while (temp != NULL) {
+        printf("%d <=> ", temp->data);
+        temp = temp->prev;
+    }
+    printf("NULL\n");
+}
+
+// 9. Search for an element in the list
+void search(int data) {
+    if (head == NULL) {
+        printf("List is empty. Cannot search.\n");
+        return;
+    }
+
+    struct Node* temp = head;
+    int position = 1;
+    while (temp != NULL) {
+        if (temp->data == data) {
+            printf("Found %d at position %d.\n", data, position);
+            return;
+        }
+        temp = temp->next;
+        position++;
+    }
+    printf("%d was not found in the list.\n", data);
+}
+
+// 10. Free all nodes in the list to prevent memory leaks
+void freeList() {
+    struct Node* current = head;
+    struct Node* nextNode;
+    while (current != NULL) {
+        nextNode = current->next;
+        free(current);
+        current = nextNode;
+    }
+    head = NULL;
+    printf("List has been completely freed.\n");
+}
+
+// Main function with a menu-driven example
+int main() {
+    int choice, data, pos;
+
+    while (1) {
+        printf("\n--- Doubly Linked List Operations Menu ---\n");
+        printf("1.  Insert at Beginning\n");
+        printf("2.  Insert at End\n");
+        printf("3.  Insert at a Specific Position\n");
+        printf("4.  Delete from Beginning\n");
+        printf("5.  Delete from End\n");
+        printf("6.  Delete from a Specific Position\n");
+        printf("7.  Display Forward\n");
+        printf("8.  Display Backward\n");
+        printf("9.  Search for an element\n");
+        printf("10. Exit\n");
+        printf("-----------------------------------------\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter data to insert: ");
+                scanf("%d", &data);
+                insertAtBeginning(data);
+                break;
+            case 2:
+                printf("Enter data to insert: ");
+                scanf("%d", &data);
+                insertAtEnd(data);
+                break;
+            case 3:
+                printf("Enter data to insert: ");
+                scanf("%d", &data);
+                printf("Enter position (1-based): ");
+                scanf("%d", &pos);
+                insertAtPosition(data, pos);
+                break;
+            case 4:
+                deleteFromBeginning();
+                break;
+            case 5:
+                deleteFromEnd();
+                break;
+            case 6:
+                printf("Enter position to delete (1-based): ");
+                scanf("%d", &pos);
+                deleteFromPosition(pos);
+                break;
+            case 7:
+                displayForward();
+                break;
+            case 8:
+                displayBackward();
+                break;
+            case 9:
+                printf("Enter data to search for: ");
+                scanf("%d", &data);
+                search(data);
+                break;
+            case 10:
+                freeList(); // Clean up memory before exiting
+                printf("Exiting program. Goodbye!\n");
+                exit(0);
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    }
+    return 0;
+}</pre>
+    </div>
+</body>
+</html>

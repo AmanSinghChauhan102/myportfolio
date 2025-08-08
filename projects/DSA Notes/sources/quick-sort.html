@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Sort Algorithm</title>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --danger: #f72585;
+            --warning: #f8961e;
+            --info: #7209b7;
+            --pivot: #9c27b0;
+        }
+        
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f5f7ff;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1, h2, h3 {
+            color: var(--primary);
+            margin-top: 1.5rem;
+        }
+        
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .algorithm-box {
+            background-color: #e8f4fc;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .code-block {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 25px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .code-block .language {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            color: #7f848e;
+            font-size: 0.8rem;
+        }
+        
+        .visualization {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .step {
+            margin-bottom: 30px;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 20px;
+        }
+        
+        .step:last-child {
+            border-bottom: none;
+        }
+        
+        .array-display {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        
+        .array-element {
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+            border-radius: 4px;
+            font-weight: bold;
+            position: relative;
+        }
+        
+        .array-element.pivot {
+            background-color: var(--pivot);
+        }
+        
+        .array-element.sorted {
+            background-color: var(--success);
+        }
+        
+        .array-element.less-than-pivot {
+            background-color: var(--info);
+        }
+        
+        .array-element.greater-than-pivot {
+            background-color: var(--warning);
+        }
+        
+        .array-element.swapping {
+            animation: pulse 0.5s ease-in-out;
+        }
+        
+        .partition-line {
+            height: 60px;
+            width: 2px;
+            background-color: var(--danger);
+            margin: 0 10px;
+            position: relative;
+        }
+        
+        .partition-line::after {
+            content: 'Partition';
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: var(--danger);
+            white-space: nowrap;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .explanation {
+            background-color: #f0f7eb;
+            border-left: 4px solid #2ecc71;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .complexity-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .complexity-table th, .complexity-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .complexity-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .complexity-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .recursion-visual {
+            background-color: #fff8e1;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            border-left: 4px solid var(--warning);
+        }
+    </style>
+</head>
+<body>
+    <h1>Quick Sort Algorithm</h1>
+    
+    <div class="algorithm-box">
+        <h2>What is Quick Sort?</h2>
+        <p>Quick Sort is a highly efficient divide-and-conquer sorting algorithm that works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays according to whether they are less than or greater than the pivot. The sub-arrays are then sorted recursively.</p>
+    </div>
+    
+    <h2>Algorithm Steps</h2>
+    <ol>
+        <li><strong>Choose a pivot element</strong> from the array (commonly the last element).</li>
+        <li><strong>Partitioning:</strong> Reorder the array so that all elements with values less than the pivot come before it, and all elements with values greater than the pivot come after it.</li>
+        <li><strong>Recursion:</strong> Apply the above steps recursively to the sub-arrays of elements before and after the pivot.</li>
+        <li><strong>Base case:</strong> The recursion stops when the sub-arrays have zero or one element.</li>
+    </ol>
+    
+    <div class="code-block">
+        <span class="language">C</span>
+        <pre>#include &lt;stdio.h&gt;
+
+// Define the number of elements to be sorted
+#define SIZE 10
+
+// A utility function to swap two elements
+void swap(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+/* 
+This function takes the last element as a pivot, places the pivot element at its
+correct position in the sorted array, and places all smaller elements to the left
+of the pivot and all greater elements to the right of the pivot.
+This function contains the main loop for partitioning.
+*/
+int partition(int arr[], int low, int high) {
+    // Choose the last element as the pivot
+    int pivot = arr[high]; 
+    
+    // Index of the smaller element
+    int i = (low - 1); 
+
+    // Loop through the array from the first element (low) to the one before the pivot
+    for (int j = low; j &lt;= high - 1; j++) {
+        // If the current element is smaller than the pivot
+        if (arr[j] &lt; pivot) {
+            i++; // Increment the index of the smaller element
+            swap(&arr[i], &arr[j]); // Swap the current element with the element at index i
+        }
+    }
+    
+    // After the loop, swap the pivot (arr[high]) into its correct position (i + 1)
+    swap(&arr[i + 1], &arr[high]);
+    
+    // Return the partitioning index
+    return (i + 1);
+}
+
+/* 
+The main function that implements QuickSort.
+arr[] --> Array to be sorted,
+low   --> Starting index,
+high  --> Ending index
+*/
+void quickSort(int arr[], int low, int high) {
+    // Base case: if low is less than high, there is more than one element to sort
+    if (low &lt; high) {
+        // pi is the partitioning index, arr[pi] is now at the right place
+        int pi = partition(arr, low, high);
+
+        // Separately sort elements before partition and after partition
+        quickSort(arr, low, pi - 1);  // Recursive call for the left sub-array
+        quickSort(arr, pi + 1, high); // Recursive call for the right sub-array
+    }
+}
+
+// Function to print an array
+void printArray(int arr[], int size) {
+    for (int i = 0; i &lt; size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+// Main driver program
+int main() {
+    int numbers[SIZE];
+
+    // 1. Accept 10 numbers from the user
+    printf("Please enter %d numbers:\n", SIZE);
+    for (int i = 0; i &lt; SIZE; i++) {
+        printf("Enter number %d: ", i + 1);
+        scanf("%d", &numbers[i]);
+    }
+
+    // 2. Display the original array
+    printf("\nOriginal array: \n");
+    printArray(numbers, SIZE);
+
+    // 3. Sort the array using Quick Sort
+    // The initial call sorts the entire array from index 0 to SIZE-1
+    quickSort(numbers, 0, SIZE - 1);
+
+    // 4. Display the sorted array
+    printf("\nArray sorted with Quick Sort: \n");
+    printArray(numbers, SIZE);
+
+    return 0;
+}</pre>
+    </div>
+    
+    <div class="explanation">
+        <h3>Code Explanation</h3>
+        <p>The provided C program demonstrates the Quick Sort algorithm:</p>
+        <ul>
+            <li><strong>swap()</strong>: Helper function to swap two elements in the array.</li>
+            <li><strong>partition()</strong>: 
+                <ul>
+                    <li>Selects the last element as pivot</li>
+                    <li>Uses a loop to rearrange elements around the pivot</li>
+                    <li>Returns the final position of the pivot element</li>
+                </ul>
+            </li>
+            <li><strong>quickSort()</strong>: 
+                <ul>
+                    <li>Recursive function that calls partition()</li>
+                    <li>Then recursively sorts the left and right partitions</li>
+                </ul>
+            </li>
+            <li><strong>main()</strong>: 
+                <ul>
+                    <li>Accepts 10 numbers from user</li>
+                    <li>Displays original array</li>
+                    <li>Sorts using quickSort()</li>
+                    <li>Displays sorted array</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    
+    <h2>Time Complexity</h2>
+    <table class="complexity-table">
+        <tr>
+            <th>Case</th>
+            <th>Time Complexity</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Best Case</td>
+            <td>O(n log n)</td>
+            <td>When the partition always divides the array into two equal halves</td>
+        </tr>
+        <tr>
+            <td>Average Case</td>
+            <td>O(n log n)</td>
+            <td>For random input data</td>
+        </tr>
+        <tr>
+            <td>Worst Case</td>
+            <td>O(n²)</td>
+            <td>When the partition always picks smallest or largest element as pivot</td>
+        </tr>
+    </table>
+    
+    <div class="explanation">
+        <h3>Space Complexity</h3>
+        <p>Quick Sort has a space complexity of O(log n) for the recursive call stack in the average case, and O(n) in the worst case (when the partition is highly unbalanced).</p>
+    </div>
+    
+    <h2>Visualization of Quick Sort</h2>
+    <div class="visualization">
+        <div class="step">
+            <h3>Initial Array</h3>
+            <div class="array-display">
+                <div class="array-element">10</div>
+                <div class="array-element">7</div>
+                <div class="array-element">8</div>
+                <div class="array-element">9</div>
+                <div class="array-element pivot">1</div>
+                <div class="array-element">5</div>
+                <div class="array-element">3</div>
+                <div class="array-element">6</div>
+                <div class="array-element">4</div>
+                <div class="array-element">2</div>
+            </div>
+            <p>Initial unsorted array with pivot selected (last element).</p>
+        </div>
+        
+        <div class="step">
+            <h3>First Partition</h3>
+            <div class="array-display">
+                <div class="array-element less-than-pivot">1</div>
+                <div class="array-element greater-than-pivot">7</div>
+                <div class="array-element greater-than-pivot">8</div>
+                <div class="array-element greater-than-pivot">9</div>
+                <div class="array-element greater-than-pivot">10</div>
+                <div class="array-element greater-than-pivot">5</div>
+                <div class="array-element greater-than-pivot">3</div>
+                <div class="array-element greater-than-pivot">6</div>
+                <div class="array-element greater-than-pivot">4</div>
+                <div class="array-element pivot">2</div>
+            </div>
+            <p>After first partition - elements less than pivot (2) moved to left.</p>
+        </div>
+        
+        <div class="step">
+            <h3>After First Partition</h3>
+            <div class="array-display">
+                <div class="array-element sorted">1</div>
+                <div class="array-element pivot">2</div>
+                <div class="array-element">7</div>
+                <div class="array-element">8</div>
+                <div class="array-element">9</div>
+                <div class="array-element">10</div>
+                <div class="array-element">5</div>
+                <div class="array-element">3</div>
+                <div class="array-element">6</div>
+                <div class="array-element">4</div>
+            </div>
+            <p>Pivot (2) is now in its correct position. Left sub-array has 1 element (sorted).</p>
+        </div>
+        
+        <div class="step">
+            <h3>Recursive Sorting</h3>
+            <div class="array-display">
+                <div class="array-element sorted">1</div>
+                <div class="array-element sorted">2</div>
+                <div class="array-element">3</div>
+                <div class="array-element">4</div>
+                <div class="array-element">5</div>
+                <div class="array-element">6</div>
+                <div class="array-element">7</div>
+                <div class="array-element">8</div>
+                <div class="array-element">9</div>
+                <div class="array-element pivot">10</div>
+            </div>
+            <p>Right sub-array being processed with new pivot (10).</p>
+        </div>
+        
+        <div class="step">
+            <h3>Final Sorted Array</h3>
+            <div class="array-display">
+                <div class="array-element sorted">1</div>
+                <div class="array-element sorted">2</div>
+                <div class="array-element sorted">3</div>
+                <div class="array-element sorted">4</div>
+                <div class="array-element sorted">5</div>
+                <div class="array-element sorted">6</div>
+                <div class="array-element sorted">7</div>
+                <div class="array-element sorted">8</div>
+                <div class="array-element sorted">9</div>
+                <div class="array-element sorted">10</div>
+            </div>
+            <p>After all recursive partitions, the array is fully sorted.</p>
+        </div>
+    </div>
+    
+    <div class="recursion-visual">
+        <h3>Recursion Visualization</h3>
+        <p>Quick Sort makes two recursive calls after each partition:</p>
+        <pre>
+quickSort(arr, 0, 9)
+├── partition(arr, 0, 9) → pivot at index 1
+│   ├── quickSort(arr, 0, 0)  // Base case (1 element)
+│   └── quickSort(arr, 2, 9)
+│       ├── partition(arr, 2, 9) → pivot at index 5
+│       │   ├── quickSort(arr, 2, 4)
+│       │   │   ├── partition(arr, 2, 4) → pivot at index 2
+│       │   │   │   ├── quickSort(arr, 2, 1)  // Base case (empty)
+│       │   │   │   └── quickSort(arr, 3, 4)
+│       │   │   │       ├── partition(arr, 3, 4) → pivot at index 3
+│       │   │   │       │   ├── quickSort(arr, 3, 2)  // Base case (empty)
+│       │   │   │       │   └── quickSort(arr, 4, 4)  // Base case (1 element)
+│       │   └── quickSort(arr, 6, 9)
+│       │       ├── partition(arr, 6, 9) → pivot at index 7
+│       │       │   ├── quickSort(arr, 6, 6)  // Base case (1 element)
+│       │       │   └── quickSort(arr, 8, 9)
+│       │       │       ├── partition(arr, 8, 9) → pivot at index 8
+│       │       │       │   ├── quickSort(arr, 8, 7)  // Base case (empty)
+│       │       │       │   └── quickSort(arr, 9, 9)  // Base case (1 element)
+        </pre>
+    </div>
+    
+    <script>
+        // Simple animation for visualization
+        document.querySelectorAll('.array-element').forEach(el => {
+            el.addEventListener('click', function() {
+                this.classList.add('swapping');
+                setTimeout(() => {
+                    this.classList.remove('swapping');
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Learning Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6C63FF;  /* Vibrant purple */
+            --secondary: #FF6584; /* Pink */
+            --accent: #00C9A7;   /* Teal */
+            --light: #F9F9FF;    /* Very light purple */
+            --dark: #2D2D3A;     /* Dark navy */
+            --success: #7CFFCB;  /* Mint */
+            --danger: #FF6B6B;   /* Coral */
+            --warning: #FFD166;  /* Yellow */
+            --info: #A78BFA;     /* Light purple */
+            --text: #2D2D3A;     /* Dark text */
+            --text-light: #F9F9FF; /* Light text */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--light);
+            scroll-behavior: smooth;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #1A1A2E;
+            color: var(--text-light);
+        }
+
+        body.dark-mode .topic-card,
+        body.dark-mode .features {
+            background-color: #16213E;
+            color: var(--text-light);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        body.dark-mode .topic-content p,
+        body.dark-mode .feature-card p {
+            color: #B8B8D1;
+        }
+
+        body.dark-mode .topic-card:hover {
+            box-shadow: 0 10px 25px rgba(108, 99, 255, 0.2);
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        body.dark-mode .footer-col ul li a {
+            color: #B8B8D1;
+        }
+
+        body.dark-mode .copyright {
+            color: #888;
+        }
+
+        body.dark-mode header {
+            background: linear-gradient(135deg, #4A3FBF, #6C63FF);
+            box-shadow: 0 4px 20px rgba(108, 99, 255, 0.3);
+        }
+
+        body.dark-mode .hero {
+            background: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.9)), url('https://images.unsplash.com/photo-1550439062-609e1531270e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+        }
+
+        /* Dark Mode Toggle Styles */
+        .dark-mode-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark);
+            border-radius: 15px;
+            cursor: pointer;
+            margin-left: auto;
+            margin-right: 1rem;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .dark-mode-toggle i {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle .fa-moon {
+            left: 8px;
+        }
+
+        .dark-mode-toggle .fa-sun {
+            right: 8px;
+            opacity: 0;
+            color: var(--warning);
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), #4A3FBF);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(108, 99, 255, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Comic Neue', cursive;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .logo i {
+            color: var(--accent);
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1550439062-609e1531270e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 6rem 1rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(108, 99, 255, 0.3), rgba(0, 201, 167, 0.3));
+            z-index: 0;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0, 201, 167, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            background-color: white;
+            color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 201, 167, 0.6);
+        }
+
+        .cta-button:active {
+            transform: translateY(1px);
+        }
+
+        /* Floating Emojis */
+        .floating-emoji {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.7;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.3rem;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            color: var(--primary);
+            font-weight: 800;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+
+        /* DSA Topics Grid */
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .topic-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(108, 99, 255, 0.1);
+            position: relative;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(108, 99, 255, 0.2);
+        }
+
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .topic-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(108, 99, 255, 0.1);
+        }
+
+        .topic-content {
+            padding: 1.8rem;
+        }
+
+        .topic-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .topic-content p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .topic-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .topic-link:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .topic-link i {
+            margin-left: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .topic-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Features Section */
+        .features {
+            background-color: white;
+            padding: 5rem 0;
+            margin: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(108, 99, 255, 0.05), rgba(0, 201, 167, 0.05));
+            z-index: 0;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(108, 99, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(108, 99, 255, 0.2);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.2) rotate(10deg);
+            color: var(--accent);
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1A1A2E);
+            color: white;
+            padding: 4rem 1rem 2rem;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-col h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.8rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            bottom: 0;
+            left: 0;
+            border-radius: 3px;
+        }
+
+        .footer-col p {
+            color: #B8B8D1;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-col ul li a {
+            color: #B8B8D1;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            font-size: 0.95rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent);
+            padding-left: 8px;
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 201, 167, 0.4);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #B8B8D1;
+            font-size: 0.9rem;
+        }
+
+        /* Floating elements */
+        .floating {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .floating-1 {
+            background: var(--primary);
+            top: 20%;
+            left: 10%;
+            animation: float-1 15s infinite ease-in-out;
+        }
+
+        .floating-2 {
+            background: var(--accent);
+            bottom: 20%;
+            right: 10%;
+            animation: float-2 18s infinite ease-in-out;
+        }
+
+        @keyframes float-1 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(50px, 50px); }
+        }
+
+        @keyframes float-2 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-50px, -50px); }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: linear-gradient(135deg, var(--primary), #4A3FBF);
+                flex-direction: column;
+                align-items: center;
+                padding: 3rem 0;
+                transition: all 0.5s ease;
+                z-index: 99;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                z-index: 100;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .dark-mode-toggle {
+                margin-right: 0.5rem;
+                width: 50px;
+                height: 25px;
+            }
+
+            .features-grid, .topics-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+    </style>
+</head>
+
+<body>
+    <!-- Floating background elements -->
+    <div class="floating floating-1"></div>
+    <div class="floating floating-2"></div>
+
+    <!-- Header/Navbar -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <i class="fas fa-project-diagram"></i>
+                <span>DSA Hub</span>
+            </div>
+            <div class="dark-mode-toggle">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="nav-links" id="navLinks">
+                <a href="#home">Home</a>
+                <a href="#topics">Topics</a>
+                <a href="#features">Features</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="fade-in">Master Data Structures & Algorithms</h1>
+            <p class="fade-in delay-1">Learn the fundamental concepts of DSA with our comprehensive collection of notes, visualizations, and
+                code examples. Perfect for beginners and advanced learners alike.</p>
+            <a href="#topics" class="cta-button fade-in delay-2">Explore Topics <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <!-- Floating emojis -->
+        <div class="floating-emoji" style="top: 20%; left: 10%;">📚</div>
+        <div class="floating-emoji" style="top: 30%; right: 15%; animation-delay: 0.5s;">💻</div>
+        <div class="floating-emoji" style="bottom: 25%; left: 20%; animation-delay: 1s;">🧠</div>
+        <div class="floating-emoji" style="bottom: 15%; right: 10%; animation-delay: 1.5s;">🚀</div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- DSA Topics Section -->
+        <section id="topics">
+            <div class="section-title">
+                <h2>DSA Topics</h2>
+            </div>
+
+            <div class="topics-grid">
+                <!-- Selection Sorting -->
+                <div class="topic-card fade-in">
+                    <img src="images/selection sort.jpg" alt="Selection Sort">
+                    <div class="topic-content">
+                        <h3>Selection Sorting</h3>
+                        <p>Selection sort repeatedly finds the minimum element and moves it to its correct position.</p>
+                        <a href="sources/selection-sorting.html" class="topic-link">View Notes <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Sort -->
+                <div class="topic-card fade-in delay-1">
+                    <img src="images/quick sort.jpg" alt="Quick Sort">
+                    <div class="topic-content">
+                        <h3>Quick Sort</h3>
+                        <p>Quick sort picks a pivot, partitions the list, and recursively sorts the parts.</p>
+                        <a href="sources/quick-sort.html" class="topic-link">View Notes <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Binary Search -->
+                <div class="topic-card fade-in delay-2">
+                    <img src="images/binary sort.jpg" alt="Binary Search">
+                    <div class="topic-content">
+                        <h3>Binary Search</h3>
+                        <p>Binary insertion sort uses binary search to find the correct position and inserts elements by
+                            shifting others.</p>
+                        <a href="sources/binary-search.html" class="topic-link">View Notes <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Merge Sort -->
+                <div class="topic-card fade-in delay-3">
+                    <img src="images/merge.jpg" alt="Merge Sort">
+                    <div class="topic-content">
+                        <h3>Merge Sort</h3>
+                        <p>Merge sort divides the list into halves, sorts them recursively, and merges the sorted halves
+                            into one.</p>
+                        <a href="sources/merge-sort.html" class="topic-link">View Notes <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Linked List -->
+                <div class="topic-card fade-in">
+                    <img src="images/linked list.jpg" alt="Linked List">
+                    <div class="topic-content">
+                        <h3>Linked Lists</h3>
+                        <p>A linked list is a linear data structure where elements (nodes) point to the next, allowing
+                            dynamic memory use.</p>
+                        <a href="sources/linked-list.html" class="topic-link">View Notes <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Doubly Linked List and Circular Linked List -->
+                <div class="topic-card fade-in delay-1">
+                    <img src="images/double linked list.jpg" alt="Doubly Linked List">
+                    <div class="topic-content">
+                        <h3>Doubly Linked List and Circular Linked List</h3>
+                        <p>A doubly linked list allows two-way traversal, while a circular linked list forms a loop by
+                            connecting the last node to the first.</p>
+                        <a href="sources/doubly-linked-list.html" class="topic-link">View Notes <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Stack -->
+                <div class="topic-card fade-in delay-2">
+                    <img src="images/stack.jpg" alt="Stack">
+                    <div class="topic-content">
+                        <h3>Stack</h3>
+                        <p>Understand the LIFO principle with stack implementations, operations, and real-world
+                            analogies.</p>
+                        <a href="sources/stack.html" class="topic-link">View Notes <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="features-container">
+            <div class="section-title">
+                <h2>Why Learn With Us</h2>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Practical Examples</h3>
+                    <p>Learn with real-world code implementations in multiple programming languages.</p>
+                </div>
+
+                <div class="feature-card fade-in delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>Visualizations</h3>
+                    <p>Understand complex concepts through interactive visualizations and animations.</p>
+                </div>
+
+                <div class="feature-card fade-in delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Complexity Analysis</h3>
+                    <p>Detailed time and space complexity explanations for each algorithm.</p>
+                </div>
+
+                <div class="feature-card fade-in delay-3">
+                    <div class="feature-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3>Practice Problems</h3>
+                    <p>Hand-picked problems to test your understanding with solutions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-col fade-in">
+                <h3>DSA Hub</h3>
+                <p>Your comprehensive resource for mastering Data Structures and Algorithms.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col fade-in delay-1">
+                <h3>Topics</h3>
+                <ul>
+                    <li><a href="sources/selection-sorting.html">Selection Sort</a></li>
+                    <li><a href="sources/quick-sort.html">Quick Sort</a></li>
+                    <li><a href="sources/binary-search.html">Binary Search</a></li>
+                    <li><a href="sources/merge-sort.html">Merge Sort</a></li>
+                    <li><a href="sources/linked-list.html">Linked List</a></li>
+                    <li><a href="sources/doubly-linked-list.html">Doubly Linked List and Circular Linked List</a></li>
+                    <li><a href="sources/stack.html">Stack</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col fade-in delay-2">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Cheat Sheets</a></li>
+                    <li><a href="#">Complexity Chart</a></li>
+                    <li><a href="#">Algorithm Visualizer</a></li>
+                    <li><a href="#">Practice Problems</a></li>
+                    <li><a href="#">Interview Prep</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col fade-in delay-3">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">amannkumarsinghh@gmail.com</a></li>
+                    <li><a href="https://forms.gle/UjuHbD8S5VdRoF7U7">Feedback</a></li>
+                    <li><a href="#">Contribute</a></li>
+                    <li><a href="#">About Us</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2023 DSA Learning Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Dark Mode Toggle
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        const body = document.body;
+
+        // Check for saved user preference
+        if (localStorage.getItem('darkMode')) {
+            body.classList.add('dark-mode');
+            darkModeToggle.querySelector('.fa-moon').style.opacity = '0';
+            darkModeToggle.querySelector('.fa-sun').style.opacity = '1';
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            // Toggle icon visibility
+            const moon = darkModeToggle.querySelector('.fa-moon');
+            const sun = darkModeToggle.querySelector('.fa-sun');
+            
+            if (body.classList.contains('dark-mode')) {
+                moon.style.opacity = '0';
+                sun.style.opacity = '1';
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                moon.style.opacity = '1';
+                sun.style.opacity = '0';
+                localStorage.removeItem('darkMode');
+            }
+        });
+
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        // Initialize animations
+        window.addEventListener('load', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            });
+            
+            animateOnScroll();
+        });
+
+        window.addEventListener('scroll', animateOnScroll);
+    </script>
+</body>
+
+</html>
