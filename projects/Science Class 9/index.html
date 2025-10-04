@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 9 Science - Chapter Wise Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --purple: #9b59b6;
+            --pink: #e84393;
+            --orange: #e67e22;
+            --teal: #1abc9c;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,192C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+
+        header h1 {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            margin-bottom: 0.5rem;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .welcome-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .welcome-section h2 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .welcome-section p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .chapters-section {
+            margin-bottom: 2rem;
+        }
+
+        .chapters-section h2 {
+            color: var(--secondary);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .chapters-section h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--teal));
+            border-radius: 3px;
+        }
+
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .chapter-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+            border-radius: 12px;
+            padding: 1.8rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--teal));
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+            border-color: var(--primary);
+        }
+
+        .chapter-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--teal));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .chapter-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--secondary);
+        }
+
+        .chapter-card p {
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+            color: #666;
+        }
+
+        .chapter-link {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--teal));
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .chapter-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .features-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .features-section h2 {
+            color: var(--secondary);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .features-section h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--teal));
+            border-radius: 3px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: var(--secondary);
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--secondary), var(--dark));
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23000000" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,192C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+
+        footer p {
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, var(--primary), var(--teal));
+            color: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            font-size: 1.3rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0.8rem;
+            }
+            
+            .welcome-section {
+                padding: 1.5rem;
+            }
+            
+            .chapters-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1.2rem;
+            }
+            
+            .chapter-card {
+                padding: 1.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            
+            .back-to-top {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 1.8rem 1rem;
+            }
+            
+            .chapters-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chapter-card {
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-atom"></i> Class 9 Science</h1>
+            <p>Explore the fascinating world of science through interactive chapters</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="welcome-section">
+            <h2>Welcome to Class 9 Science!</h2>
+            <p>This website provides comprehensive resources for Class 9 Science curriculum. Explore each chapter through interactive content, diagrams, examples, and practice questions to enhance your understanding of scientific concepts.</p>
+            <p>Select any chapter below to begin your learning journey!</p>
+        </section>
+
+        <section class="chapters-section">
+            <h2>Science Chapters</h2>
+            <div class="chapters-grid">
+                <div class="chapter-card">
+                    <div class="chapter-icon">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <h3>Chapter 1: Matter in Our Surroundings</h3>
+                    <p>Understand the nature of matter, its states, and properties</p>
+                    <a href="chapters/matter-in-our-surroundings.html" class="chapter-link">Explore Chapter</a>
+                </div>
+                
+                <div class="chapter-card">
+                    <div class="chapter-icon">
+                        <i class="fas fa-vial"></i>
+                    </div>
+                    <h3>Chapter 2: Is Matter Around Us Pure?</h3>
+                    <p>Learn about mixtures, compounds, and separation techniques</p>
+                    <a href="is-matter-around-us-pure.html" class="chapter-link">Explore Chapter</a>
+                </div>
+                
+                <div class="chapter-card">
+                    <div class="chapter-icon">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <h3>Chapter 3: Atoms and Molecules</h3>
+                    <p>Discover the building blocks of matter and chemical formulas</p>
+                    <a href="atoms-and-molecules.html" class="chapter-link">Explore Chapter</a>
+                </div>
+                
+                <div class="chapter-card">
+                    <div class="chapter-icon">
+                        <i class="fas fa-structure"></i>
+                    </div>
+                    <h3>Chapter 4: Structure of the Atom</h3>
+                    <p>Explore atomic models, electrons, protons, and neutrons</p>
+                    <a href="structure-of-the-atom.html" class="chapter-link">Explore Chapter</a>
+                </div>
+                
+                <div class="chapter-card">
+                    <div class="chapter-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>Chapter 5: The Fundamental Unit of Life</h3>
+                    <p>Study cell structure, functions, and types of cells</p>
+                    <a href="fundamental-unit-of-life.html" class="chapter-link">Explore Chapter</a>
+                </div>
+                
+                <div class="chapter-card">
+                    <div class="chapter-icon">
+                        <i class="fas fa-tissues"></i>
+                    </div>
+                    <h3>Chapter 6: Tissues</h3>
+                    <p>Learn about plant and animal tissues and their functions</p>
+                    <a href="tissues.html" class="chapter-link">Explore Chapter</a>
+                </div>
+                
+                <div class="chapter-card">
+                    <div class="chapter-icon">
+                        <i class="fas fa-motion"></i>
+                    </div>
+                    <h3>Chapter 7: Motion</h3>
+                    <p>Understand concepts of motion, speed, velocity, and acceleration</p>
+                    <a href="motion.html" class="chapter-link">Explore Chapter</a>
+                </div>
+                
+                <div class="chapter-card">
+                    <div class="chapter-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>Chapter 8: Force and Laws of Motion</h3>
+                    <p>Explore Newton's laws and the concept of force</p>
+                    <a href="force-and-laws-of-motion.html" class="chapter-link">Explore Chapter</a>
+                </div>
+                
+                <div class="chapter-card">
+                    <div class="chapter-icon">
+                        <i class="fas fa-grav"></i>
+                    </div>
+                    <h3>Chapter 9: Gravitation</h3>
+                    <p>Learn about universal law of gravitation and its applications</p>
+                    <a href="gravitation.html" class="chapter-link">Explore Chapter</a>
+                </div>
+                
+                <div class="chapter-card">
+                    <div class="chapter-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h3>Chapter 10: Work and Energy</h3>
+                    <p>Understand work, energy, power, and their conservation</p>
+                    <a href="work-and-energy.html" class="chapter-link">Explore Chapter</a>
+                </div>
+                
+                <div class="chapter-card">
+                    <div class="chapter-icon">
+                        <i class="fas fa-sound"></i>
+                    </div>
+                    <h3>Chapter 11: Sound</h3>
+                    <p>Study production, propagation, and properties of sound</p>
+                    <a href="sound.html" class="chapter-link">Explore Chapter</a>
+                </div>
+                
+                <div class="chapter-card">
+                    <div class="chapter-icon">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <h3>Chapter 12: Improvement in Food Resources</h3>
+                    <p>Learn about crop production, management, and animal husbandry</p>
+                    <a href="improvement-in-food-resources.html" class="chapter-link">Explore Chapter</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <h2>Website Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Comprehensive Content</h3>
+                    <p>Detailed explanations with examples for each concept</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <h3>Visual Learning</h3>
+                    <p>Diagrams, illustrations, and animations to aid understanding</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3>Practice Questions</h3>
+                    <p>Chapter-wise questions to test your knowledge</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Optimized for all devices including smartphones and tablets</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Class 9 Science - Educational Resource</p>
+            <p>Comprehensive learning materials for CBSE curriculum</p>
+            <p>© 2025 Science Learning Portal</p>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add animation to chapter cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe chapter cards
+        document.querySelectorAll('.chapter-card').forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(card);
+        });
+
+        // Observe feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

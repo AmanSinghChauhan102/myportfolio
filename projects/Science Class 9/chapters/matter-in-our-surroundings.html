@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matter in Our Surroundings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        nav {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+            padding: 0.5rem;
+        }
+
+        nav li {
+            margin: 0.2rem;
+        }
+
+        nav a {
+            display: block;
+            padding: 0.8rem 1rem;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        nav a:hover, nav a:focus {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-3px);
+        }
+
+        h2 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light);
+            display: flex;
+            align-items: center;
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
+        }
+
+        h2 i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        h3 {
+            color: var(--primary);
+            margin: 1.5rem 0 1rem;
+            font-size: clamp(1.2rem, 3vw, 1.4rem);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            font-size: clamp(0.95rem, 2.5vw, 1rem);
+        }
+
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .definition-box {
+            background-color: var(--light);
+            border-left: 4px solid var(--primary);
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .formula {
+            background-color: #e8f4fc;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            margin: 1.5rem 0;
+            font-weight: bold;
+        }
+
+        .example-box {
+            background-color: #f0f7ff;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--success);
+        }
+
+        .activity-box {
+            background-color: #fff8e1;
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--warning);
+        }
+
+        .activity-box h4 {
+            color: var(--warning);
+            margin-bottom: 0.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: clamp(0.85rem, 2vw, 1rem);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.8rem;
+            text-align: left;
+        }
+
+        td {
+            padding: 0.8rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .comparison-table {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .states-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .state-card {
+            flex: 1;
+            min-width: 250px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .state-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .state-card.solid {
+            border-top: 4px solid #3498db;
+        }
+
+        .state-card.liquid {
+            border-top: 4px solid #2ecc71;
+        }
+
+        .state-card.gas {
+            border-top: 4px solid #e74c3c;
+        }
+
+        .state-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .state-card.solid .state-icon {
+            color: #3498db;
+        }
+
+        .state-card.liquid .state-icon {
+            color: #2ecc71;
+        }
+
+        .state-card.gas .state-icon {
+            color: #e74c3c;
+        }
+
+        .question-box {
+            background-color: #f8f9fa;
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        .question {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .answer {
+            margin-left: 1rem;
+        }
+
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 2rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            font-size: 1.2rem;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0.5rem;
+            }
+            
+            nav {
+                position: relative;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                width: 100%;
+                text-align: left;
+                padding: 1rem;
+                background-color: white;
+                border-bottom: 1px solid #eee;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                display: none;
+                padding: 0;
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav li {
+                margin: 0;
+            }
+            
+            nav a {
+                text-align: left;
+                border-bottom: 1px solid #eee;
+                padding: 1rem;
+                border-radius: 0;
+            }
+            
+            section {
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .states-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .state-card {
+                min-width: 100%;
+            }
+            
+            table {
+                font-size: 0.8rem;
+            }
+            
+            th, td {
+                padding: 0.5rem;
+            }
+            
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 1.5rem 1rem;
+            }
+            
+            h2 {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            h2 i {
+                margin-bottom: 0.5rem;
+                margin-right: 0;
+            }
+            
+            .definition-box, .example-box, .activity-box, .question-box {
+                padding: 1rem;
+            }
+            
+            .formula {
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Matter in Our Surroundings</h1>
+            <p>Understanding the fundamental nature and properties of matter around us</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i> Menu
+            </button>
+            <ul id="navMenu">
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#physical-nature">Physical Nature</a></li>
+                <li><a href="#characteristics">Characteristics</a></li>
+                <li><a href="#states">States of Matter</a></li>
+                <li><a href="#change-state">Changing States</a></li>
+                <li><a href="#evaporation">Evaporation</a></li>
+                <li><a href="#units">Units & Conversions</a></li>
+                <li><a href="#questions">Questions</a></li>
+            </ul>
+        </nav>
+
+        <section id="introduction">
+            <h2><i class="fas fa-atom"></i> Introduction to Matter</h2>
+            
+            <div class="definition-box">
+                <p><strong>Definition:</strong> "Anything that has mass and occupies space is called matter".</p>
+            </div>
+            
+            <div class="formula">
+                MASS + SPACE = "MATTER"
+            </div>
+            
+            <p><strong>Examples:</strong> Table, chair, air, water, honey, etc.</p>
+            
+            <p><strong>Classification:</strong> Matter is classified based on its physical and chemical properties.</p>
+        </section>
+
+        <section id="physical-nature">
+            <h2><i class="fas fa-microscope"></i> Physical Nature of Matter</h2>
+            
+            <p><strong>Particulate Nature:</strong> Matter is composed of tiny particles, which are called atoms.</p>
+            
+            <h3>Size of Particles:</h3>
+            <ul>
+                <li>The particles are incredibly small, beyond our imagination.</li>
+                <li>They are so small they cannot be seen with the naked eye or a regular microscope.</li>
+                <li>Powerful microscopes can be used to observe them.</li>
+            </ul>
+            
+            <div class="activity-box">
+                <h4>Activity (Demonstrating Particle Size):</h4>
+                <p><strong>Experiment:</strong> Dissolve 2-3 potassium permanganate crystals in 100 mL of water. Then, take 10 mL of this solution and add it to 90 mL of clear water. This process is repeated 5 to 8 times.</p>
+                <p><strong>Observation:</strong> The water remains colored even after many dilutions.</p>
+                <p><strong>Conclusion:</strong> This shows that just a few crystals contain millions of tiny particles, which are able to color a large volume of water.</p>
+            </div>
+        </section>
+
+        <section id="characteristics">
+            <h2><i class="fas fa-shapes"></i> Characteristics of Particles of Matter</h2>
+            
+            <div class="definition-box">
+                <p><strong>Summary of Characteristics:</strong></p>
+                <ul>
+                    <li>The particles of matter are very, very small.</li>
+                    <li>The particles of matter have space between them.</li>
+                    <li>The particles of matter are constantly moving.</li>
+                    <li>The particles of matter attract each other.</li>
+                </ul>
+            </div>
+            
+            <h3>A. Particles of Matter Have Spaces Between Them</h3>
+            <p>The space between particles varies in different states of matter; it is least in solids and most in gases.</p>
+            <div class="example-box">
+                <p><strong>Example:</strong> When sugar or salt is dissolved in water, the particles occupy the interspaces between the water particles, and as a result, the water level does not change.</p>
+            </div>
+            
+            <h3>B. Particles of Matter are in Constant Motion</h3>
+            <p>Particles of matter are always moving. The extent of movement varies by state:</p>
+            <ul>
+                <li><strong>Solids:</strong> Particles vibrate in fixed positions (least movement).</li>
+                <li><strong>Liquids:</strong> Particles can slide past one another (more movement).</li>
+                <li><strong>Gases:</strong> Particles move freely at high speeds (most movement).</li>
+            </ul>
+            
+            <p><strong>Kinetic Energy:</strong> The energy that particles possess due to their motion is called Kinetic Energy.</p>
+            
+            <p><strong>Diffusion:</strong> It is the process of a substance mixing with another due to the movement of its particles. Diffusion is fastest in gases and slowest in solids. Increasing the temperature raises the kinetic energy of particles, making them move faster and thus increasing the rate of diffusion.</p>
+            
+            <div class="example-box">
+                <p><strong>Examples:</strong> The smell of perfume or hot food spreads because their particles diffuse through the air. The particles from a burning incense stick move rapidly and mix with air to reach every part of a room.</p>
+            </div>
+            
+            <h3>C. Particles of Matter Attract Each Other</h3>
+            <p>An inter-particle force of attraction exists between the particles of every substance. To break a substance, this force must be overcome. The strength of this force varies between different substances.</p>
+            <p>The physical state of matter is determined by the balance between the kinetic energy of particles and the inter-particle force of attraction.</p>
+            
+            <div class="example-box">
+                <p><strong>Example:</strong> It is easy to move your hand through air (negligible force) and water (weak force), but it is difficult to move it through a solid plank of wood (very strong force).</p>
+            </div>
+        </section>
+
+        <section id="states">
+            <h2><i class="fas fa-cubes"></i> States of Matter</h2>
+            
+            <p>Matter exists in three primary states: <strong>Solids</strong>, <strong>Liquids</strong>, and <strong>Gases</strong>.</p>
+            
+            <div class="states-container">
+                <div class="state-card solid">
+                    <div class="state-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <h3>Solids</h3>
+                    <p>Fixed shape and volume</p>
+                    <p>Strong intermolecular forces</p>
+                    <p>Examples: Ice, iron</p>
+                </div>
+                
+                <div class="state-card liquid">
+                    <div class="state-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3>Liquids</h3>
+                    <p>Fixed volume, takes container shape</p>
+                    <p>Moderate intermolecular forces</p>
+                    <p>Examples: Water, oil</p>
+                </div>
+                
+                <div class="state-card gas">
+                    <div class="state-icon">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <h3>Gases</h3>
+                    <p>No fixed shape or volume</p>
+                    <p>Weak intermolecular forces</p>
+                    <p>Examples: Air, helium</p>
+                </div>
+            </div>
+            
+            <h3>Properties of Solids, Liquids, and Gases</h3>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Solids</th>
+                            <th>Liquids</th>
+                            <th>Gases</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Space Between Particles</td>
+                            <td>Very little space</td>
+                            <td>More space than solids, less than gases</td>
+                            <td>Particles are far apart</td>
+                        </tr>
+                        <tr>
+                            <td>Force of Attraction</td>
+                            <td>Very strong</td>
+                            <td>Strong, but not enough to hold position</td>
+                            <td>Negligible</td>
+                        </tr>
+                        <tr>
+                            <td>Particle Arrangement</td>
+                            <td>Closely packed, orderly</td>
+                            <td>Can slip and slide, disorderly</td>
+                            <td>Very disorderly</td>
+                        </tr>
+                        <tr>
+                            <td>Shape</td>
+                            <td>Fixed shape</td>
+                            <td>Takes the shape of the container</td>
+                            <td>No definite shape</td>
+                        </tr>
+                        <tr>
+                            <td>Volume</td>
+                            <td>Fixed volume</td>
+                            <td>Fixed volume</td>
+                            <td>No definite volume, fills container</td>
+                        </tr>
+                        <tr>
+                            <td>Compressibility</td>
+                            <td>Cannot be compressed</td>
+                            <td>Almost negligible compressibility</td>
+                            <td>Can be compressed easily</td>
+                        </tr>
+                        <tr>
+                            <td>Kinetic Energy</td>
+                            <td>Very low</td>
+                            <td>Higher than solids</td>
+                            <td>Maximum kinetic energy</td>
+                        </tr>
+                        <tr>
+                            <td>Movement of Particles</td>
+                            <td>Vibrate in fixed positions</td>
+                            <td>Can move past one another</td>
+                            <td>Move freely in all directions</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3>Other States of Matter</h3>
+            <p><strong>Plasma:</strong> Considered the fourth state of matter. It is a high-energy, ionized state where atoms are stripped of their electrons, creating a mix of free electrons and ions.</p>
+            <ul>
+                <li><strong>Natural Plasma:</strong> The sun and stars are made of plasma created by high temperatures.</li>
+                <li><strong>Man-Made Plasma:</strong> Used in neon signs, where an electric current ionizes gas to create plasma that emits light.</li>
+            </ul>
+            
+            <p><strong>Bose-Einstein Condensate (BEC):</strong> The fifth state of matter, based on a study by Indian physicist Satyendra Nath Bose and predicted by Albert Einstein. It is formed by cooling a gas of extremely low density to super-low temperatures.</p>
+        </section>
+
+        <section id="change-state">
+            <h2><i class="fas fa-thermometer-half"></i> Can Matter Change Its State?</h2>
+            
+            <p>Yes, matter can change its state by altering conditions of temperature and pressure.</p>
+            
+            <h3>A. Effect of Temperature</h3>
+            
+            <p><strong>Melting (Solid to Liquid):</strong> Increasing the temperature of a solid increases the kinetic energy of its particles, causing them to vibrate faster. Eventually, the heat energy overcomes the forces of attraction, and the solid converts to a liquid. This process is also known as <strong>fusion</strong>.</p>
+            
+            <p><strong>Melting Point:</strong> The minimum temperature at which a solid melts into a liquid. The melting point of ice is 273.15 K (0°C).</p>
+            
+            <p><strong>Boiling (Liquid to Gas):</strong> Heating a liquid increases particle movement.</p>
+            
+            <p><strong>Boiling Point:</strong> The temperature at which a liquid starts boiling to become a gas at atmospheric pressure. The boiling point of water is 373 K (100°C).</p>
+            
+            <p>Boiling is a bulk phenomenon, meaning particles from the entire bulk of the liquid gain enough energy to change state.</p>
+            
+            <p><strong>Latent Heat:</strong> During a change of state (like melting or boiling), the temperature remains constant. The heat energy supplied is used to overcome the forces of attraction between particles. This hidden heat is called <strong>latent heat</strong>.</p>
+            
+            <ul>
+                <li><strong>Latent Heat of Fusion:</strong> The amount of heat needed to convert 1 kg of a solid into a liquid at its melting point.</li>
+                <li><strong>Latent Heat of Vaporization:</strong> The amount of heat needed to convert 1 kg of a liquid into a gas at its boiling point.</li>
+            </ul>
+            
+            <p><strong>Sublimation:</strong> The change of state directly from solid to gas without passing through the liquid state. Examples include ammonium chloride, camphor, naphthalene, and dry ice (solid CO₂).</p>
+            
+            <p><strong>Deposition:</strong> The change of state directly from gas to solid.</p>
+            
+            <h3>B. Effect of Pressure</h3>
+            
+            <p>The physical state of matter can be changed by increasing or decreasing pressure.</p>
+            
+            <p>Gases can be converted into liquids by increasing pressure and lowering temperature.</p>
+            
+            <p>Solids can be changed into gases by decreasing the pressure.</p>
+            
+            <div class="example-box">
+                <p><strong>Dry Ice:</strong> Solid carbon dioxide (CO₂) is stored under high pressure. When the pressure is decreased, it directly converts into carbon dioxide gas.</p>
+            </div>
+        </section>
+
+        <section id="evaporation">
+            <h2><i class="fas fa-cloud"></i> Evaporation</h2>
+            
+            <p><strong>Definition:</strong> The phenomenon of a liquid changing into vapors at any temperature below its boiling point.</p>
+            
+            <h3>How Evaporation Causes Cooling:</h3>
+            <p>During evaporation, particles of a liquid absorb energy from their surroundings to overcome the forces of attraction and change into vapor. This absorption of heat makes the surroundings cool.</p>
+            
+            <div class="example-box">
+                <p><strong>Examples:</strong> We sweat in summer, and the evaporation of this sweat absorbs heat from our body, making us feel cool. Cotton clothes are good absorbers of sweat and expose it to the air, which increases the rate of evaporation. Water kept in an earthen pot stays cool because water evaporates from the pores on its surface.</p>
+            </div>
+            
+            <h3>Factors Affecting Evaporation</h3>
+            <ul>
+                <li><strong>Temperature:</strong> Rate of evaporation increases with an increase in temperature.</li>
+                <li><strong>Surface Area:</strong> Rate of evaporation increases with an increase in surface area.</li>
+                <li><strong>Humidity:</strong> Rate of evaporation decreases as humidity increases.</li>
+                <li><strong>Wind Speed:</strong> Rate of evaporation increases with an increase in wind speed.</li>
+            </ul>
+            
+            <h3>Comparison: Evaporation vs. Boiling</h3>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Evaporation</th>
+                            <th>Boiling</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Can take place at all temperatures</td>
+                            <td>Takes place only at a fixed temperature (the boiling point)</td>
+                        </tr>
+                        <tr>
+                            <td>A slow and gradual process</td>
+                            <td>A rapid and violent process</td>
+                        </tr>
+                        <tr>
+                            <td>Takes place only at the surface of the liquid</td>
+                            <td>Takes place over the entire liquid</td>
+                        </tr>
+                        <tr>
+                            <td>Causes cooling</td>
+                            <td>Does not produce cooling</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="units">
+            <h2><i class="fas fa-ruler"></i> Important SI Units & Conversions</h2>
+            
+            <ul>
+                <li><strong>Mass:</strong> The SI unit is the kilogram (kg).</li>
+                <li><strong>Volume:</strong> The SI unit is the cubic meter (m³). A common unit is the liter (L). 1L = 1dm³; 1L = 1000mL; 1mL = 1cm³.</li>
+                <li><strong>Temperature:</strong> The SI unit is Kelvin (K). Other units are degree Celsius (°C) and Fahrenheit.</li>
+            </ul>
+            
+            <div class="formula">
+                <p>Celsius to Kelvin: K = °C + 273.15 (often rounded to 273)</p>
+                <p>Kelvin to Celsius: °C = K - 273.15 (often rounded to 273)</p>
+            </div>
+            
+            <div class="example-box">
+                <p><strong>Examples:</strong> 0°C = 273K, 25°C = 298K, 100°C = 373K.</p>
+            </div>
+        </section>
+
+        <section id="questions">
+            <h2><i class="fas fa-question-circle"></i> Questions from the Document</h2>
+            
+            <div class="question-box">
+                <p class="question">What about a rubber band, can it change its shape on stretching? Is it a solid?</p>
+                <p class="answer">A rubber band is considered a solid because it has a definite shape and volume. When stretched, it changes shape temporarily due to its elastic properties, but it returns to its original shape when the force is removed.</p>
+            </div>
+            
+            <div class="question-box">
+                <p class="question">What about sugar and salt? When kept in different jars these take the shape of the jar. Are they solid?</p>
+                <p class="answer">Yes, sugar and salt are solids. They are composed of small crystals that can flow and take the shape of their container like liquids, but each individual crystal maintains its solid state with a definite shape and volume.</p>
+            </div>
+            
+            <div class="question-box">
+                <p class="question">What about a sponge? It is a solid yet we are able to compress it. Why?</p>
+                <p class="answer">A sponge is a solid with a porous structure containing many air pockets. When compressed, the air is squeezed out, allowing the sponge to reduce in volume. However, the solid material itself is not compressed significantly.</p>
+            </div>
+            
+            <div class="question-box">
+                <p class="question">When a Solid melts its temperature remains the same, so where does the heat energy go?</p>
+                <p class="answer">This heat gets used up in changing the state by overcoming the forces of attraction between the particles.</p>
+            </div>
+            
+            <div class="question-box">
+                <p class="question">Why should we wear cotton clothes in summer?</p>
+                <p class="answer">In summer, we sweat more. Cotton clothes absorb this sweat and expose it to the air, which helps in its evaporation and cools our body.</p>
+            </div>
+            
+            <div class="question-box">
+                <p class="question">Why do we see water droplets on the outer surface of a glass containing ice-cold water?</p>
+                <p class="answer">Water vapor present in the air comes in contact with the cold outer surface of the glass and condenses, turning into liquid water droplets.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Matter in Our Surroundings - Educational Resource</p>
+            <p>Understanding the fundamental properties of matter around us</p>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navMenu.classList.remove('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 20,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Adjust navigation for mobile on resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navMenu.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    </script>
+</body>
+</html>
