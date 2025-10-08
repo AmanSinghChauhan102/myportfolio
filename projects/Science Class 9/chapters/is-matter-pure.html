@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 9 Science - Is Matter Around Us Pure - Notes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --purple: #9b59b6;
+            --pink: #e84393;
+            --orange: #e67e22;
+            --teal: #1abc9c;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,192C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+
+        header h1 {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            margin-bottom: 0.5rem;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .notes-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .notes-section h2 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .notes-section h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--teal));
+            border-radius: 3px;
+        }
+
+        .topic-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--primary);
+        }
+
+        .topic-card h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .topic-card p {
+            margin-bottom: 1rem;
+        }
+
+        .topic-card ul, .topic-card ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .topic-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--primary), var(--teal));
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .comparison-table tr:hover {
+            background-color: #e9ecef;
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--primary);
+        }
+
+        .example-box h4 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .question-box {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--warning);
+        }
+
+        .question-box h4 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight {
+            background-color: #fff9c4;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .definition {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--success);
+        }
+
+        .definition h4 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, var(--primary), var(--teal));
+            color: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            font-size: 1.3rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--secondary), var(--dark));
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23000000" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,192C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+
+        footer p {
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0.8rem;
+            }
+            
+            .notes-section {
+                padding: 1.5rem;
+            }
+            
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+            
+            .comparison-table th, .comparison-table td {
+                padding: 0.8rem;
+            }
+            
+            .back-to-top {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 1.8rem 1rem;
+            }
+            
+            .topic-card {
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-vial"></i> Is Matter Around Us Pure?</h1>
+            <p>Class 9 Science - Complete Chapter Notes</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="notes-section">
+            <h2>Chapter Topics</h2>
+            
+            <div class="topic-card">
+                <h3>Classification of Matter</h3>
+                <p>MATTER can be classified into:</p>
+                <ul>
+                    <li>Pure Substances</li>
+                    <li>Mixtures</li>
+                </ul>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Pure Substance</h3>
+                <p>Pure substances are defined as substances that are made of only one type of atom or only one type of molecule. For Example, Diamond, Salt, Sulphur, Tin.</p>
+                
+                <div class="definition">
+                    <h4>Characteristics of Pure Substance:</h4>
+                    <ul>
+                        <li><span class="highlight">Definite Composition:</span> A pure substance has a uniform and definite composition i.e. Homogeneous in nature.</li>
+                        <li><span class="highlight">Inseparability by Physical Means:</span> Pure substances cannot be separated into other kinds of matter by any physical means. For instance, pure water cannot be separated into hydrogen and oxygen by simple filtration.</li>
+                        <li><span class="highlight">Consistent Properties:</span> The physical and chemical properties of a pure substance are consistent and do not vary. This includes properties like density, color, and hardness.</li>
+                    </ul>
+                </div>
+                
+                <div class="definition">
+                    <h4>Types of Pure Substances:</h4>
+                    <ul>
+                        <li><span class="highlight">Elements:</span> Element is a basic form of matter that cannot be broken down into simpler substances by chemical reactions. e.g. Gold, Sodium, Iron, etc.</li>
+                        <li><span class="highlight">Compounds:</span> Compounds are chemical substances made up of two or more elements that are chemically bound together in a fixed proportion. e.g. Salt, Carbon dioxide etc.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Elements and Matter</h3>
+                <p>Elements can exist in different states:</p>
+                <ul>
+                    <li><span class="highlight">Solid:</span> Iron, copper, gold, silver</li>
+                    <li><span class="highlight">Liquid:</span> Bromine, mercury</li>
+                    <li><span class="highlight">Gas:</span> Oxygen, hydrogen</li>
+                </ul>
+                
+                <p>Elements are classified as:</p>
+                <ul>
+                    <li>Metals</li>
+                    <li>Non-Metals</li>
+                    <li>Metalloids</li>
+                </ul>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Properties of Metals</h3>
+                <ul>
+                    <li>Metals are lustrous (shiny)</li>
+                    <li>Metals conduct heat and electricity</li>
+                    <li>Metals have a silver-grey or gold-yellow colour</li>
+                    <li>We can hammer metals and form thin sheets (Malleability)</li>
+                    <li>We can convert metals into wires (Ductility)</li>
+                    <li>Metals always produce a ringing sound if they are hit (Sonorous)</li>
+                </ul>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Properties of Non-Metals</h3>
+                <ul>
+                    <li>They display a variety of colours.</li>
+                    <li>They are poor conductors of heat and electricity</li>
+                    <li>They are not lustrous, sonorous or malleable</li>
+                </ul>
+                <p>Examples of non-metals are hydrogen, oxygen, iodine, carbon (coal, coke), bromine, chlorine etc.</p>
+                
+                <div class="definition">
+                    <h4>Properties of Metalloids</h4>
+                    <p>Elements having intermediate properties between those of metals and non-metals are called metalloids.</p>
+                    <p>Examples: Boron, silicon, germanium etc.</p>
+                </div>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Compounds</h3>
+                <p>It is a substance that consists of two or more substances chemically combined together in fixed proportion.</p>
+                <p>For Example, Ammonium Sulphate, Sulphur Chloride, Water.</p>
+                
+                <div class="definition">
+                    <h4>Properties of Compounds:</h4>
+                    <ul>
+                        <li>These substances are combined chemically with each other in fixed proportions</li>
+                        <li>The properties of a compound are different from that of its constituents</li>
+                        <li>The components of a compound can only be separated by chemical processes like electrolysis and cannot be separated by physical methods.</li>
+                    </ul>
+                </div>
+                
+                <div class="example-box">
+                    <h4>Example: Is water an element or a compound?</h4>
+                    <p>Water (H₂O) is a compound composed of two elements: hydrogen and oxygen. In this compound, hydrogen (H) and oxygen (O) are present in a fixed mass ratio of 1:8.</p>
+                    <p>The atomic mass unit (amu) of hydrogen (H) is 1 amu.</p>
+                    <p>The atomic mass unit (amu) of oxygen (O) is 16 amu.</p>
+                    <p>There are 2 hydrogen atoms and 1 oxygen atom.</p>
+                    <p>Therefore, the mass ratio of hydrogen to oxygen in water is:</p>
+                    <p>2 × 1 amu : 1 × 16 amu = 2 : 16 = 1 : 8</p>
+                    <p>This fixed proportion is a characteristic property of compounds, indicating that the elements in a compound are always combined in the same ratio by mass.</p>
+                </div>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Mixtures</h3>
+                <p>If two or more substances (elements or compounds) are mixed together in any proportion, and they do not undergo any chemical change but retain their properties, the resulting substance is called mixture.</p>
+                
+                <p>Types of mixtures:</p>
+                <ul>
+                    <li>Homogeneous Mixtures</li>
+                    <li>Heterogeneous Mixtures</li>
+                </ul>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Homogeneous Mixtures</th>
+                            <th>Heterogeneous Mixtures</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mixing of Components</td>
+                            <td>Components are uniformly mixed with no visible boundaries.</td>
+                            <td>Components are not uniformly mixed with visible boundaries.</td>
+                        </tr>
+                        <tr>
+                            <td>Example</td>
+                            <td>Sugar in water.</td>
+                            <td>Oil and water.</td>
+                        </tr>
+                        <tr>
+                            <td>Distribution of Components</td>
+                            <td>Uniformly distributed.</td>
+                            <td>Not uniformly distributed.</td>
+                        </tr>
+                        <tr>
+                            <td>Separation of Components</td>
+                            <td>Cannot be separated by physical means.</td>
+                            <td>Can be separated by physical means.</td>
+                        </tr>
+                        <tr>
+                            <td>Variation in Composition</td>
+                            <td>The ratio of compositions can vary, e.g., different amounts of sugar in lemonade.</td>
+                            <td>Example: Sand in water, where sand settles and can be separated by filtration.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Difference between Mixture & Compounds</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Mixtures</th>
+                            <th>Compounds</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Formation</td>
+                            <td>Formed by physically mixing two or more substances.</td>
+                            <td>Formed by chemically combining two or more elements.</td>
+                        </tr>
+                        <tr>
+                            <td>Purity</td>
+                            <td>Considered impure substances.</td>
+                            <td>Considered pure substances.</td>
+                        </tr>
+                        <tr>
+                            <td>Composition</td>
+                            <td>Variable composition.</td>
+                            <td>Fixed composition.</td>
+                        </tr>
+                        <tr>
+                            <td>Nature</td>
+                            <td>Can be homogeneous or heterogeneous.</td>
+                            <td>Always homogeneous.</td>
+                        </tr>
+                        <tr>
+                            <td>Separation Methods</td>
+                            <td>Can be separated by physical methods (e.g., filtration).</td>
+                            <td>Can only be separated by chemical or electrochemical methods.</td>
+                        </tr>
+                        <tr>
+                            <td>Retention of Properties</td>
+                            <td>Constituents retain their individual properties.</td>
+                            <td>Constituents lose their individual properties; the compound has unique properties.</td>
+                        </tr>
+                        <tr>
+                            <td>Formation of New Substances</td>
+                            <td>No new substances are formed; properties depend on the constituents.</td>
+                            <td>A new substance is formed with different properties from its constituents.</td>
+                        </tr>
+                        <tr>
+                            <td>Melting and Boiling Points</td>
+                            <td>Do not have defined melting and boiling points.</td>
+                            <td>Have defined melting and boiling points.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Are alloys mixtures or compounds?</h3>
+                <p>Alloys are combinations of two or more metals or a metal and a non-metal. They cannot be separated into their components by physical methods. Despite this, alloys are considered mixtures because they retain the properties of their constituent elements and can have varying compositions.</p>
+                <div class="example-box">
+                    <h4>Example:</h4>
+                    <p>Brass is an alloy made up of about 30% zinc and 70% copper.</p>
+                </div>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Types of Mixtures</h3>
+                
+                <div class="definition">
+                    <h4>Homogeneous Mixtures - Solution (True Solution)</h4>
+                    <ul>
+                        <li>The particles are very small, less than 1 nm (10⁻⁶ m).</li>
+                        <li>Transparent.</li>
+                        <li>Particles cannot be separated by filtration.</li>
+                        <li>Does not scatter the beam of light.</li>
+                        <li>Example: Salt-water.</li>
+                    </ul>
+                </div>
+                
+                <div class="definition">
+                    <h4>Heterogeneous Mixtures - Colloids (Colloidal Solution)</h4>
+                    <ul>
+                        <li>Particles are small, ranging from 1-100 nm (10⁻⁶ m to 10⁻⁷ m).</li>
+                        <li>Translucent.</li>
+                        <li>Particles cannot be separated by filtration.</li>
+                        <li>Scatters a beam of light.</li>
+                        <li>Example: Milk.</li>
+                    </ul>
+                </div>
+                
+                <div class="definition">
+                    <h4>Heterogeneous Mixtures - Suspension</h4>
+                    <ul>
+                        <li>Particles are larger than 100 nm.</li>
+                        <li>Opaque.</li>
+                        <li>Particles can be separated by filtration.</li>
+                        <li>Scatters light significantly.</li>
+                        <li>Example: Sand in water.</li>
+                    </ul>
+                </div>
+                
+                <p>Particle size comparison:</p>
+                <ul>
+                    <li>Solution: particle size < 1 nm</li>
+                    <li>Colloid: particle size 1 nm to 1000 nm</li>
+                    <li>Suspension: particle size > 1000 nm</li>
+                </ul>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Solution</h3>
+                <p>A solution is a homogeneous mixture of two or more substances.</p>
+                <p>Example: Sugar solution, Salt water, Soft drinks, Tea, Coffee, etc.</p>
+                
+                <div class="definition">
+                    <h4>Components of a Solution:</h4>
+                    <ul>
+                        <li><span class="highlight">Solvent:</span> The component that dissolves the other component is called solvent.</li>
+                        <li><span class="highlight">Solute:</span> The component that is dissolved in the solvent is/are called solute.</li>
+                    </ul>
+                    <p>For example: In salt water solution, salt is solute and water is solvent.</p>
+                </div>
+                
+                <div class="question-box">
+                    <h4>Question:</h4>
+                    <p>Identify solute and solvent in 80% solution of ethyl alcohol with water.</p>
+                </div>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Concentration of a Solution</h3>
+                <p>A solution may have a small amount of solute dissolved in it while another solution may have large amount of solute dissolved in it.</p>
+                <p>The concentration of a solution is the amount of solute present in a given amount of the solution.</p>
+                
+                <p>Types of solutions based on concentration:</p>
+                <ul>
+                    <li>Diluted</li>
+                    <li>Concentrated</li>
+                </ul>
+                
+                <div class="definition">
+                    <h4>Formulas for Concentration:</h4>
+                    <ul>
+                        <li>Mass by mass % of solution = (Mass of solute / Mass of solution) × 100</li>
+                        <li>Mass by volume % of solution = (Mass of solute / Volume of solution) × 100</li>
+                        <li>Volume by volume % of solution = (Volume of solute / Volume of solution) × 100</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Solubility</h3>
+                <p>The solubility of a solute in a solvent at a specific temperature refers to the maximum amount of the solute that can dissolve in 100 grams of the solvent at that temperature.</p>
+                
+                <div class="question-box">
+                    <h4>Question:</h4>
+                    <p>To make a saturated solution, 36g of sodium chloride is dissolved in 100g of water at 293 K. Find its concentration at this temperature.</p>
+                </div>
+                
+                <div class="question-box">
+                    <h4>Question:</h4>
+                    <p>A solution contains 60 g of sugar in 480 g of water. Calculate the concentration of solution in terms of mass by mass percentage of the solution. (CBSE 2010, 2012)</p>
+                </div>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Saturated and Unsaturated Solutions</h3>
+                
+                <div class="definition">
+                    <h4>Saturated Solution</h4>
+                    <p>A saturated solution refers to a solution where no additional solute can be dissolved at a specific temperature.</p>
+                    <p>Example: 36 g NaCl in 100 mL H₂O at room temperature.</p>
+                </div>
+                
+                <div class="definition">
+                    <h4>Unsaturated Solution</h4>
+                    <p>An unsaturated solution refers to a solution where more solute can be dissolved at a specific temperature.</p>
+                    <p>Example: 30 g NaCl in 100 mL H₂O at room temperature.</p>
+                </div>
+                
+                <div class="definition">
+                    <h4>Effect of Temperature on Saturated Solution</h4>
+                    <ul>
+                        <li><span class="highlight">Case 1:</span> On increasing the temperature - More solute can be dissolved</li>
+                        <li><span class="highlight">Case 2:</span> On decreasing the temperature - Some solute may crystallize out</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Colloidal Solution</h3>
+                <p>In a colloid, particles of a substance are evenly spread throughout the solution. These particles are larger than those in a solution but smaller than those in a suspension. This makes a colloid seem uniform but it is actually a blend of different components.</p>
+                
+                <div class="definition">
+                    <h4>Components of Colloid:</h4>
+                    <ul>
+                        <li><span class="highlight">Dispersed Phase:</span> Component present in smaller proportion. It is analogous to solute of a solution.</li>
+                        <li><span class="highlight">Dispersion Medium:</span> Component present in larger proportion. It is analogous to solvent of a solution.</li>
+                    </ul>
+                </div>
+                
+                <h4>Types of Colloids:</h4>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Dispersed Phase</th>
+                            <th>Dispersing Medium</th>
+                            <th>Type</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Liquid</td>
+                            <td>Gas</td>
+                            <td>Aerosol</td>
+                            <td>Fog, clouds, mist</td>
+                        </tr>
+                        <tr>
+                            <td>Solid</td>
+                            <td>Gas</td>
+                            <td>Aerosol</td>
+                            <td>Smoke, automobile exhaust</td>
+                        </tr>
+                        <tr>
+                            <td>Gas</td>
+                            <td>Liquid</td>
+                            <td>Foam</td>
+                            <td>Shaving cream</td>
+                        </tr>
+                        <tr>
+                            <td>Liquid</td>
+                            <td>Liquid</td>
+                            <td>Emulsion</td>
+                            <td>Milk, face cream</td>
+                        </tr>
+                        <tr>
+                            <td>Solid</td>
+                            <td>Liquid</td>
+                            <td>Sol</td>
+                            <td>Milk of magnesia, mud</td>
+                        </tr>
+                        <tr>
+                            <td>Gas</td>
+                            <td>Solid</td>
+                            <td>Foam</td>
+                            <td>Foam rubber, sponge, pumice</td>
+                        </tr>
+                        <tr>
+                            <td>Liquid</td>
+                            <td>Solid</td>
+                            <td>Gel</td>
+                            <td>Jelly, cheese, butter</td>
+                        </tr>
+                        <tr>
+                            <td>Solid</td>
+                            <td>Solid</td>
+                            <td>Solid Sol</td>
+                            <td>Coloured gemstone, milky glass</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Suspension</h3>
+                <p>A suspension is a heterogeneous mixture in which the solute particles do not dissolve but remain suspended throughout the bulk of the medium.</p>
+                
+                <div class="definition">
+                    <h4>Properties of a Suspension:</h4>
+                    <ul>
+                        <li>Heterogeneous mixture</li>
+                        <li>Particles visible to the naked eye</li>
+                        <li>Scatters light, making its path visible</li>
+                        <li>Particles settle over time, making it unstable</li>
+                        <li>Can be separated by filtration</li>
+                        <li>Does not scatter light once particles settle</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Tyndall Effect</h3>
+                <p>The phenomenon of scattering of a beam of light by colloidal particles, when passed through a colloidal solution, is called the Tyndall effect.</p>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Light Beam</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Solution</td>
+                            <td>NOT VISIBLE</td>
+                            <td>Water</td>
+                        </tr>
+                        <tr>
+                            <td>Colloid</td>
+                            <td>VISIBLE</td>
+                            <td>Milk</td>
+                        </tr>
+                        <tr>
+                            <td>Suspension</td>
+                            <td>VISIBLE</td>
+                            <td>Flour and Water</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Properties of Solutions, Colloids, and Suspensions</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Solution</th>
+                            <th>Colloid</th>
+                            <th>Suspension</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Particle type</td>
+                            <td>Ions, atoms, small molecules</td>
+                            <td>Large molecules or particles</td>
+                            <td>Large particles or aggregates</td>
+                        </tr>
+                        <tr>
+                            <td>Particle size</td>
+                            <td>0.1-1 nm</td>
+                            <td>1-1000 nm</td>
+                            <td>1000 nm and larger</td>
+                        </tr>
+                        <tr>
+                            <td>Effect of light</td>
+                            <td>No scattering</td>
+                            <td>Exhibits Tyndall effect</td>
+                            <td>Exhibits Tyndall effect</td>
+                        </tr>
+                        <tr>
+                            <td>Effect of gravity</td>
+                            <td>Stable, does not separate</td>
+                            <td>Stable, does not separate</td>
+                            <td>Unstable, sediment forms</td>
+                        </tr>
+                        <tr>
+                            <td>Uniformity</td>
+                            <td>Homogeneous</td>
+                            <td>Heterogeneous</td>
+                            <td>Heterogeneous</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Physical Changes vs Chemical Changes</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Physical Changes</th>
+                            <th>Chemical Changes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Changes that do not result in the formation of new substances are referred to as physical changes.</td>
+                            <td>Changes that result in the formation of new substances are known as chemical changes.</td>
+                        </tr>
+                        <tr>
+                            <td>During a physical change, the substances involved do not alter their identity.</td>
+                            <td>During a chemical change, the substances undergo a transformation in their identity.</td>
+                        </tr>
+                        <tr>
+                            <td>Physical changes can typically be reversed by using a physical process, indicating that they are usually reversible.</td>
+                            <td>Chemical changes typically cannot revert to their original form, indicating that they are generally irreversible.</td>
+                        </tr>
+                        <tr>
+                            <td>Changes in the physical state, size, and shape of a substance are examples of physical changes.</td>
+                            <td>Substances are converted into entirely new substances during chemical changes.</td>
+                        </tr>
+                        <tr>
+                            <td>Examples: melting of ice, chopping of vegetables, boiling of water.</td>
+                            <td>Examples: burning of magnesium, burning of paper, rusting of iron.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="question-box">
+                    <h4>Question:</h4>
+                    <p>Burning of a candle is a physical or chemical change?</p>
+                </div>
+                
+                <div class="question-box">
+                    <h4>Question:</h4>
+                    <p>Which of the following are chemical changes?</p>
+                    <ul>
+                        <li>(a) Growth of a plant</li>
+                        <li>(b) Rusting of iron</li>
+                        <li>(c) Mixing of iron filings and sand</li>
+                        <li>(d) Cooking of food</li>
+                        <li>(e) Digestion of food</li>
+                        <li>(f) Freezing of water</li>
+                        <li>(g) Burning of a candle.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="topic-card">
+                <h3>TOP 5 Questions</h3>
+                
+                <div class="question-box">
+                    <h4>Question 1:</h4>
+                    <p>Which of the following will show "Tyndall effect"?</p>
+                    <ul>
+                        <li>a. Salt solution</li>
+                        <li>b. Milk</li>
+                        <li>c. Copper sulphate solution</li>
+                        <li>d. Starch solution</li>
+                    </ul>
+                </div>
+                
+                <div class="question-box">
+                    <h4>Question 2:</h4>
+                    <p>Which of the following statement are true for pure substances?</p>
+                    <ul>
+                        <li>(i) Pure substances contain only one kind of particles.</li>
+                        <li>(ii) Pure substances may be compounds or mixtures.</li>
+                        <li>(iii) Pure substances have the same composition throughout.</li>
+                        <li>(iv) Pure Substances can be exemplified by all elements other than nickel.</li>
+                    </ul>
+                    <p>a. (i) and (ii)</p>
+                    <p>b. (i) and (iii)</p>
+                    <p>c. (iii) and (iv)</p>
+                    <p>d. (ii) and (iii)</p>
+                </div>
+                
+                <div class="question-box">
+                    <h4>Question 3:</h4>
+                    <p>Two substances, A and B, were made to react to form a third substance, A₂B, according to the following reaction: 2A + B → A₂B. Which of the following statements concerning this reaction are incorrect?</p>
+                    <ul>
+                        <li>a. The product, A₂B, shows the properties of substances A and B.</li>
+                        <li>b. The product will always have a fixed composition.</li>
+                        <li>c. The product cannot be classified as a compound.</li>
+                        <li>d. The product formed is an element.</li>
+                    </ul>
+                </div>
+                
+                <div class="question-box">
+                    <h4>Question 4:</h4>
+                    <p>Mercury and Bromine are both</p>
+                    <ul>
+                        <li>a. liquid at room temperature</li>
+                        <li>b. solid at room temperature</li>
+                        <li>c. gases at room temperature</li>
+                        <li>d. both (a) and (b)</li>
+                    </ul>
+                </div>
+                
+                <div class="question-box">
+                    <h4>Question 5:</h4>
+                    <p>Classify Brass and Diamond as element or mixture?</p>
+                </div>
+            </div>
+            
+            <div class="topic-card">
+                <h3>Inspirational Quote</h3>
+                <div class="example-box">
+                    <p>"When life feels like a mixture of problems just remember to find the pure essence within you."</p>
+                    <p>- Pure substance</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Class 9 Science - Is Matter Around Us Pure - Notes</p>
+            <p>Comprehensive chapter notes for CBSE curriculum</p>
+            <p>© Aman Singh</p>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add animation to topic cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe topic cards
+        document.querySelectorAll('.topic-card').forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
